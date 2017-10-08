@@ -39,6 +39,8 @@ class CommentsController < ApplicationController
     redirect_to("/post/#{post_id}")
   end
 
+  private
+
   def allowed_params_comment
     params.require(:comment).permit(:user_id, :post_id, :content)
   end

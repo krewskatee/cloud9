@@ -7,7 +7,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     unless data.content.blank?
-      $('#message-wr').append '<div class="message-content">'+ data.content + '</div>'
+      $('#message-wr').append '<div class="message-content">'+ data.username+ ': ' + data.content + '</div>'
 
 
 $(document).on 'turbolinks:load', ->

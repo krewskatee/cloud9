@@ -108,6 +108,8 @@ class PostsController < ApplicationController
     redirect_to("/")
   end
 
+  private
+
   def allowed_params_post
     params.require(:post).permit(:user_id, :title, :content, :post_image)
   end
