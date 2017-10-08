@@ -1,0 +1,9 @@
+<div id="messages" class="messages">
+  <div id="messages-table" class="messages-table">
+    <% @chat_messages.each do |message| %>
+        <%= message.content %>
+        Created By: <%= message.content %>
+        <br>
+    <% end %>
+  </div>
+</div>

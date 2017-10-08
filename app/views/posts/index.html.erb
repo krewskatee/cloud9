@@ -1,0 +1,50 @@
+
+<div class="top-header">
+  <% if current_user %>
+    <form class="form-inline logged">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <%= link_to "Create a post", "/post", class: "btn btn-info btn-md" %>
+    <% else %>
+
+    <%= form_tag("/", :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  <% end %>
+</div>
+
+<section class="container post">
+
+  <%= form_tag("/", :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+
+
+  <% @posts.each do |post| %>
+  <div class="post-content">
+      <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get%></h1>
+        <h5 class="content"><%= post.content %></h5>
+
+    <div class="created-date">
+      Created By: <%= post.user.username %>
+        <br/>
+      <% if post.comments.last %>
+        Last Updated: <%= post.comments.last.created_at %>
+      <% else %>
+        Last Updated: <%= post.created_at %>
+      <% end %>
+    </div>
+
+    <div class="views">
+      Views
+      <%= post.visit_count %>
+      Comments
+      <%= post.comments.count %>
+    </div>
+
+  </div>
+  <% end %>
+</section>

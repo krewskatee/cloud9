@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Strive</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" class="active" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li>
+      <% if !current_user %>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/login">Log In</a>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="logo">
+      <a href="/"><%= image_tag "small-letter-logo.png", style: 'height:20px;width:auto;'%></a>
+    </div>
+    <br/><br/><br/>
+
+      <div>
+        <%= render 'layouts/messages' %>
+      </div>
+      <%= yield %>
+  </body>
+</html>

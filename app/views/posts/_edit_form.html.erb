@@ -1,0 +1,19 @@
+<%= form_for @post, url: "/post/#{ @post.id }", method: :patch, html: { multipart: true } do |f| %>
+
+
+  <%= fields_for :tags do |f| %>
+     <%= f.text_field :title, value: @post.tags %>
+  <% end %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :title %>:
+  <%= f.text_field :title, value: @post.title %><br />
+
+  <%= f.label :content, value: @post.content %>:
+  <%= f.text_field :content %><br />
+
+  <%= f.file_field :post_image %>
+
+
+  <%= f.submit %>
+<% end %>

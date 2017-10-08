@@ -1,0 +1,125 @@
+@import "bootstrap";
+
+//------------------variables----------------//
+$background_color: #2E294E;
+$font_color: #FFFFFF;
+$link_color : #D4DBF4;
+
+
+body {
+  font-family: 'PT Sans', sans-serif;
+  background-color: orange;
+  .jumbo-form {
+    padding-top: 100px;
+    width: 800px;
+    font-family: 'PT Sans', sans-serif;
+  }
+
+  #error_explanation {
+    background-color: #F2DEDE;
+    color: #A74545;
+  }
+
+  .logo {
+    float: left;
+  }
+  .nav {
+  float: right;
+  }
+  .nav-item {
+    font-family: 'PT Sans', sans-serif;
+  }
+  a {
+    color: $link_color;
+  }
+  a:hover {
+    color: $font_color;
+  }
+
+  a:active {
+    justify-content: flex-start;
+  }
+
+  h1 {
+    color: $font_color;
+  }
+
+  .field {
+    text-align: center;
+  }
+
+    .login {
+      text-align: left;
+      font-size: 14px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+    .actions {
+      display: flex;
+      float: right;
+    }
+    .render_wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .input_field {
+    background: transparent;
+    border: none;
+    border-bottom: solid;
+    border-radius: 0px;
+    border-bottom-width: 1px;
+    }
+
+    input:focus {
+    outline:none;
+    background: transparent;
+    }
+
+    .field {
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+
+
+    //INDEX FORUM PAGE
+
+    //-----------FORUM POST VARIABLES------------//
+    $form_post_background: #E9ECEF;
+    .top-header {
+
+    }
+
+    .post {
+
+      .post-content {
+        background-color: $form_post_background;
+        border-bottom: solid;
+        border-bottom-width: thin;
+
+        .content {
+
+        }
+
+        .created-date {
+          display: inline-block;
+          margin-left: 300px;
+        }
+
+        .views {
+          display: inline;
+          margin-left: 900px;
+          text-align: center;
+
+        }
+      }
+
+    }
+
+
+}

@@ -1,0 +1,19 @@
+<div id="message-wr">
+    <% @chat_messages.each do |message| %>
+        <%= message.content %>
+        <div id="message-content">
+          <%= message.content %>
+        </div>
+    <% end %>
+
+</div>
+
+<div class="message-input">
+  <%= form_for(@chat_message, remote: true) do |f| %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.text_area :content %>
+
+    <%= f.submit "send", class: "btn btn-large btn-primary"%>
+  <% end %>
+</div>

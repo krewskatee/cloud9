@@ -1,0 +1,30 @@
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @post.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for @post, url: "/post", method: :post, html: { multipart: true } do |f| %>
+
+
+  <%= fields_for :tags do |f| %>
+     <%= f.text_field :title %>
+  <% end %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_field :content %><br />
+
+  <%= f.file_field :post_image %>
+
+
+  <%= f.submit %>
+<% end %>
