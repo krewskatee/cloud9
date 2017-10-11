@@ -10,6 +10,7 @@
     Tags: <%= tag.title %>
   <% end %>
   <% end %>
+
   <% if current_user && current_user == @post.user || current_user && current_user.admin %>
     <%= link_to "Delete", "/post/#{@post.id}", method: :delete, class: 'btn btn-danger' %>
     <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get, class: 'btn btn-info' %>

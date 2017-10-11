@@ -8,14 +8,3 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   received: (data) ->
     unless data.content.blank?
       $('#message-wr').append '<div class="message-content">'+ data.username+ ': ' + data.content + '</div>'
-
-
-$(document).on 'turbolinks:load', ->
-  submit_message()
-
-submit_message = () ->
-  $('#message-content').on 'keydown', (event) ->
-    if event.keyCode is 13
-      $('input').click()
-      event.target.value = ""
-      event.preventDefault()

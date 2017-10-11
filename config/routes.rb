@@ -8,8 +8,15 @@ Rails.application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  get 'chat_messages' => 'chat_messages#index'
-  resource :chat_messages
+  post '/chat_messages' => 'chat_messages#create'
+
+  #resources :chat_messages
+
+  get '/chats' => 'chats#index'
+  get '/chats/:id' => 'chats#show'
+  post '/chats' => 'chats#create'
+  delete '/chats' => 'chats#destroy'
+  patch '/chats/:id' => 'chats#update'
 
   get '/' => 'posts#index'
 
