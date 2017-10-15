@@ -5,7 +5,8 @@ class ChatMessagesController < ApplicationController
   def create
     @chat_message = ChatMessage.new(message_params)
     if @chat_message.save
-      ActionCable.server.broadcast "room_channel_#{message_params[:chat_id]}",
+      gon.chat = @chat_message.chat_id
+      ActionCable.server.broadcast "room_channel_#{@chat_message.chat_id}",
                                   content:  @chat_message.content,
                                   username: @chat_message.user.username
       head :ok

@@ -16,6 +16,7 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     @chat_messages = Chat.find(params[:id]).chat_messages
     @chat_message = ChatMessage.new
+    gon.chat_id = @chat.id
   end
 
   private

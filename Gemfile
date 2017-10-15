@@ -19,13 +19,14 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'bootstrap', '~> 4.0.0.beta'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap-sass'
 gem "bootstrap_flash_messages", "~> 1.0.1"
 gem "paperclip", "~> 5.0.0"
 gem 'pg_search'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'gon'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

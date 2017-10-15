@@ -3,8 +3,8 @@
   <head>
     <title>Strive</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= Gon::Base.render_data %>
     <%= javascript_include_tag 'application' %>
   </head>
 
