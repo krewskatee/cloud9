@@ -9,7 +9,7 @@
   <% @post.tags.each do |tag| %>
     Tags: <%= tag.title %>
   <% end %>
-  <% end %>
+<% end %>
 
   <% if current_user && current_user == @post.user || current_user && current_user.admin %>
     <%= link_to "Delete", "/post/#{@post.id}", method: :delete, class: 'btn btn-danger' %>
@@ -30,6 +30,6 @@
       <%= f.text_field :content %><br />
       <%= f.submit %>
     <% end %>
-    <%= link_to "Back", "/", method: :get, class: 'btn btn-success' %>
+  <%= link_to "Back", "/", method: :get, class: 'btn btn-success' %>
 <% end %>
 <h3>Visits: <%= @post.visit_count %></h3>
