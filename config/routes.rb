@@ -32,6 +32,14 @@ Rails.application.routes.draw do
   post '/comment' => 'comments#create'
   delete '/post/:id' => 'posts#destroy'
 
+  get '/friends' => 'relationships#index'
+  get '/friends/new' => 'relationships#new'
+  post '/friends' => 'relationships#create'
+  patch '/friends/decision/:id' => 'relationships#friend_decision'
+  delete '/friends/:id' => 'relationships#destroy'
+
+  patch '/comment/:id' => 'comments#update'
+
   mount ActionCable.server, at: '/cable'
 
 
