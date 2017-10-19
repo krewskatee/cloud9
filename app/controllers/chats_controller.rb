@@ -1,8 +1,9 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
-    @friends = Relationship.all.where(befriender_id: current_user.id).where(status: "accepted") && Relationship.all.where(friend_id: current_user.id).where(status: "accepted")
-    @friend_requests = Relationship.all.where(friend_id: current_user.id).where(status: "pending")
+    @friends = current_user.accepted_friends
+    @friend_requests = current_user.friend_requests
     gon.user_id = current_user.id
     @chats = current_user.chats
     @chat = Chat.new
@@ -17,12 +18,16 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @user_chat = UserChat.new()
-    gon.user_id = current_user.id
-    @chat = Chat.find(params[:id])
-    @chat_messages = Chat.find(params[:id]).chat_messages
-    @chat_message = ChatMessage.new
-    gon.chat_id = @chat.id
+    if !current_user.chats.where("chat_id = #{params[:id]}").empty?
+      @user_chat = UserChat.new()
+      gon.user_id = current_user.id
+      @chat = Chat.find(params[:id])
+      @chat_messages = Chat.find(params[:id]).chat_messages
+      @chat_message = ChatMessage.new
+      gon.chat_id = @chat.id
+    else
+      redirect_to "/chats"
+    end
   end
 
   private

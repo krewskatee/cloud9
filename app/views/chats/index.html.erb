@@ -10,7 +10,9 @@
 <% end %>
 
 <h1>Friends</h1>
-
+<% @friends.each do |friend| %>
+  <h5><%= friend.friend.username %></h5>
+<% end %>
 
 <div id="friends-list">
   <h1>Friend Requests</h1>

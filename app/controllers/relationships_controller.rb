@@ -1,7 +1,9 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+
   def index
     @friends = current_user.accepted_friends
-    @friend_requests = Relationship.all.where(friend_id: current_user.id).where(status: "pending")
+    @friend_requests = current_user.friend_requests
   end
 
   def new
@@ -9,24 +11,29 @@ class RelationshipsController < ApplicationController
   end
 
   def create
-    @relationship = Relationship.new(relationship_params)
-    if friends_pending? || befrienders_pending?
-      flash[:info] = "Friendship Pending"
-      redirect_to '/friends/new'
-    elsif friends_accepted? || befrienders_accepted?
-      flash[:info] = "You are already friends with this person"
-      redirect_to '/friends/new'
-    elsif self_friend?
-      flash[:info] = "You cannot be friends with yourself."
+    unless friend
+      flash[:danger] = "User does not exist."
       redirect_to '/friends/new'
     else
-      if @relationship.save
-        gon.send_id = @relationship.friend_id
-        ActionCable.server.broadcast "room_channel_user_#{gon.send_id}",
-                                    friend_username: User.find(@relationship.befriender_id).username,
-                                    friend_request_content: true
+      @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id])
+      if friends_pending? || befrienders_pending?
+        flash[:info] = "Friendship Pending"
+        redirect_to '/friends/new'
+      elsif friends_accepted? || befrienders_accepted?
+        flash[:info] = "You are already friends with this person"
+        redirect_to '/friends/new'
+      elsif self_friend?
+        flash[:info] = "You cannot be friends with yourself."
+        redirect_to '/friends/new'
+      else
+        if @relationship.save
+          gon.send_id = @relationship.friend_id
+          ActionCable.server.broadcast "room_channel_user_#{gon.send_id}",
+                                      friend_username: User.find(@relationship.befriender_id).username,
+                                      friend_request_content: true
 
-        head :ok
+          head :ok
+        end
       end
     end
   end
@@ -45,27 +52,31 @@ class RelationshipsController < ApplicationController
 
   private
 
+  def friend
+    User.find_by(username: relationship_params[:friend_id])
+  end
+
   def self_friend?
-    User.find(relationship_params[:friend_id]).id == current_user.id
+    friend.id == current_user.id
   end
 
   def friends_pending?
-    friends = current_user.friends.find_by(befriender_id: relationship_params[:friend_id])
+    friends = current_user.friends.find_by(befriender_id: friend.id)
     friends != nil && friends.status == "pending"
   end
 
   def friends_accepted?
-    friends = current_user.friends.find_by(befriender_id: relationship_params[:friend_id])
+    friends = current_user.friends.find_by(befriender_id: friend.id)
     friends != nil && friends.status == "accepted"
   end
 
   def befrienders_pending?
-    befrienders = current_user.befrienders.find_by(friend_id: relationship_params[:friend_id])
+    befrienders = current_user.befrienders.find_by(friend_id: friend.id)
     befrienders != nil && befrienders.status == "pending"
   end
 
   def befrienders_accepted?
-    befrienders = current_user.befrienders.find_by(friend_id: relationship_params[:friend_id])
+    befrienders = current_user.befrienders.find_by(friend_id: friend.id)
     befrienders != nil && befrienders.status == "accepted"
   end
 
