@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   post '/chat_messages' => 'chat_messages#create'
 
-  #resources :chat_messages
 
   get '/chats' => 'chats#index'
   get '/chats/:id' => 'chats#show'
@@ -37,6 +36,8 @@ Rails.application.routes.draw do
   post '/friends' => 'relationships#create'
   patch '/friends/decision/:id' => 'relationships#friend_decision'
   delete '/friends/:id' => 'relationships#destroy'
+
+  post '/user_chats' => 'user_chats#create'
 
   patch '/comment/:id' => 'comments#update'
 

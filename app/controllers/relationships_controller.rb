@@ -5,12 +5,11 @@ class RelationshipsController < ApplicationController
   end
 
   def new
-    @relationship = Relationship.new
+      @relationship = Relationship.new
   end
 
   def create
     @relationship = Relationship.new(relationship_params)
-
     if friends_pending? || befrienders_pending?
       flash[:info] = "Friendship Pending"
       redirect_to '/friends/new'
@@ -22,9 +21,12 @@ class RelationshipsController < ApplicationController
       redirect_to '/friends/new'
     else
       if @relationship.save
-        redirect_to "/friends"
-      else
-        redirect_to "/"
+        gon.send_id = @relationship.friend_id
+        ActionCable.server.broadcast "room_channel_user_#{gon.send_id}",
+                                    friend_username: User.find(@relationship.befriender_id).username,
+                                    friend_request_content: true
+
+        head :ok
       end
     end
   end

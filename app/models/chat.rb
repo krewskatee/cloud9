@@ -1,4 +1,6 @@
 class Chat < ApplicationRecord
-  belongs_to :user
   has_many :chat_messages
+  
+  has_many :user_chats
+  has_many :users, through: :user_chats
 end

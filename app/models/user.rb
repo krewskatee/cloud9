@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_many :chat_messages
   has_many :comments
   has_many :posts, through: :comments
-  has_many :chats
+
+  has_many :user_chats
+  has_many :chats, through: :user_chats
 
   has_many :friends, class_name: "Relationship", foreign_key: :friend_id
   has_many :befrienders, class_name: "Relationship", foreign_key: :befriender_id

@@ -1,4 +1,4 @@
-<%= include_gon %>
+
 <div id="message-wr">
     <% @chat_messages.each do |message| %>
         <div id="message-content">
@@ -7,7 +7,15 @@
     <% end %>
 </div>
 
-<input type="hidden" id="message_chat_id" name="hi" value="<%= @chat.id %>">
+<center>
+  <h4>Add people to chat</h4>
+  <%= form_for @user_chat, url: "/user_chats", method: :post do |f| %>
+    <%= f.hidden_field :chat_id, value: @chat.id %>
+    <%= f.text_area :user_id %>
+    <%= f.submit "send", class: "btn btn-large btn-primary"%>
+  <% end %>
+</center>
+
 
 <div class="message-input">
   <%= form_for(@chat_message, remote: true) do |f| %>

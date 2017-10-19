@@ -1,12 +1,22 @@
 <div class="add-chat">
   <%= form_for @chat, url: "/chats", method: :post do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.text_field :name %>
     <%= f.submit "Create Chat", class: "btn btn-large btn-primary"%>
   <% end %>
 </div>
 
 <% @chats.each do |chat| %>
-<h3><%= chat.name %></h3>
 <h1 class="chat_link"><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></h1>
 <% end %>
+
+<h1>Friends</h1>
+
+
+<div id="friends-list">
+  <h1>Friend Requests</h1>
+  <% @friend_requests.each do |friend_request| %>
+    <h5><%= friend_request.befriender.username %></h5>
+    <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch, class: 'btn btn-success' %>
+    <%= link_to "Decline", "/friends/#{friend_request.id}", method: :delete, class: 'btn btn-danger' %>
+  <% end %>
+</div>
