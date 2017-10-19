@@ -18,4 +18,8 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
 
 
+  def accepted_friends
+    (friends.where("relationship.status = 'accepted'") + befrienders.where("relationship.status = 'accepted'")).flatten
+  end
+  
 end

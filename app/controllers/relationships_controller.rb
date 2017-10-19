@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   def index
-    @friends = Relationship.all.where(befriender_id: current_user.id).where(status: "accepted") && Relationship.all.where(friend_id: current_user.id).where(status: "accepted")
+    @friends = current_user.accepted_friends
     @friend_requests = Relationship.all.where(friend_id: current_user.id).where(status: "pending")
   end
 
@@ -46,47 +46,27 @@ class RelationshipsController < ApplicationController
   private
 
   def self_friend?
-    if User.find(relationship_params[:friend_id]).id == current_user.id
-      return true
-    else
-      return false
-    end
+    User.find(relationship_params[:friend_id]).id == current_user.id
   end
 
   def friends_pending?
     friends = current_user.friends.find_by(befriender_id: relationship_params[:friend_id])
-    if friends != nil && friends.status == "pending"
-      return true
-    else
-      return false
-    end
+    friends != nil && friends.status == "pending"
   end
 
   def friends_accepted?
     friends = current_user.friends.find_by(befriender_id: relationship_params[:friend_id])
-    if friends != nil && friends.status == "accepted"
-      return true
-    else
-      return false
-    end
+    friends != nil && friends.status == "accepted"
   end
 
   def befrienders_pending?
     befrienders = current_user.befrienders.find_by(friend_id: relationship_params[:friend_id])
-    if befrienders != nil && befrienders.status == "pending"
-      return true
-    else
-      return false
-    end
+    befrienders != nil && befrienders.status == "pending"
   end
 
   def befrienders_accepted?
     befrienders = current_user.befrienders.find_by(friend_id: relationship_params[:friend_id])
-    if befrienders != nil && befrienders.status == "accepted"
-      return true
-    else
-      return false
-    end
+    befrienders != nil && befrienders.status == "accepted"
   end
 
   def relationship_params
