@@ -30,6 +30,14 @@ class ChatsController < ApplicationController
     end
   end
 
+  def destroy
+    chat = Chat.find(params[:id])
+    chat_users = UserChat.where(chat_id: chat.id)
+    chat.destroy
+    chat_users.destroy_all
+    redirect_to "/chats"
+  end
+
   private
 
   def chat_params

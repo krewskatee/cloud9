@@ -1,3 +1,4 @@
+<%= link_to "Delete Chat Room", "/chats/#{params[:id]}", method: :delete, class: 'btn btn-danger' %>
 <div id="message-wr">
     <% @chat_messages.each do |message| %>
         <div id="message-content">
@@ -9,6 +10,15 @@
 <center>
   <h4>Add people to chat</h4>
   <%= form_for @user_chat, url: "/user_chats", method: :post do |f| %>
+    <%= f.hidden_field :chat_id, value: @chat.id %>
+    <%= f.text_area :user_id %>
+    <%= f.submit "send", class: "btn btn-large btn-primary"%>
+  <% end %>
+</center>
+
+<center>
+  <h4>Remove people from chat</h4>
+  <%= form_for @user_chat, url: "/user_chats", method: :delete do |f| %>
     <%= f.hidden_field :chat_id, value: @chat.id %>
     <%= f.text_area :user_id %>
     <%= f.submit "send", class: "btn btn-large btn-primary"%>

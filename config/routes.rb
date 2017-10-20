@@ -14,8 +14,7 @@ Rails.application.routes.draw do
   get '/chats' => 'chats#index'
   get '/chats/:id' => 'chats#show'
   post '/chats' => 'chats#create'
-  delete '/chats' => 'chats#destroy'
-  patch '/chats/:id' => 'chats#update'
+  delete '/chats/:id' => 'chats#destroy'
 
   get '/' => 'posts#index'
 
@@ -38,6 +37,7 @@ Rails.application.routes.draw do
   delete '/friends/:id' => 'relationships#destroy'
 
   post '/user_chats' => 'user_chats#create'
+  delete '/user_chats' => 'user_chats#destroy'
 
   patch '/comment/:id' => 'comments#update'
 
