@@ -1,125 +1,111 @@
 @import "bootstrap";
 
-//------------------variables----------------//
+//------------------GLOBAL VARIABLES----------------//
 $background_color: #FFFFFF;
-$font_color: black;
+$font_color: #ECF0F1;
 $link_color : black;
+$nav_bar_link_hover_color: #BEC3C7;
+$header_background_color: #273644;
+// #55d6aa;
 
-
+//------------------GLOBAL STYLING----------------//
 body {
-  font-family: 'PT Sans', sans-serif;
-  background-color: white;
-  .jumbo-form {
-    padding-top: 100px;
-    width: 800px;
-    font-family: 'PT Sans', sans-serif;
-  }
-
-  #error_explanation {
-    background-color: #F2DEDE;
-    color: #A74545;
-  }
-
-  .logo {
-    float: left;
-  }
-  .nav {
-  float: right;
-  }
-  .nav-item {
-    font-family: 'PT Sans', sans-serif;
-  }
-  a {
-    color: $link_color;
-  }
-  a:hover {
-    color: $font_color;
-  }
-
-  a:active {
-    justify-content: flex-start;
-  }
-
-  h1 {
-    color: $font_color;
-  }
-
-  .field {
-    text-align: center;
-  }
-
-    .login {
-      text-align: left;
-      font-size: 14px;
-    }
-
-    h2 {
-      text-align: center;
-    }
-    .actions {
-      display: flex;
-      float: right;
-    }
-    .render_wrapper {
-      display: flex;
-      justify-content: center;
-    }
-
-    .input_field {
-    background: transparent;
-    border: none;
-    border-bottom: solid;
-    border-radius: 0px;
-    border-bottom-width: 1px;
-    }
-
-    input:focus {
-    outline:none;
-    background: transparent;
-    }
-
-    .field {
-      padding-left: 100px;
-      padding-right: 100px;
-    }
-    input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 30px white inset;
-    }
-
-
-    //INDEX FORUM PAGE
-
-    //-----------FORUM POST VARIABLES------------//
-    $form_post_background: #E9ECEF;
-    .top-header {
-
-    }
-
-    .post {
-
-      .post-content {
-        background-color: $form_post_background;
-        border-bottom: solid;
-        border-bottom-width: thin;
-
-        .content {
-
-        }
-
-        .created-date {
-          display: inline-block;
-          margin-left: 300px;
-        }
-
-        .views {
-          display: inline;
-          margin-left: 900px;
-          text-align: center;
-
-        }
-      }
-
-    }
-
-
+  margin: 0;
+  background: #fff;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+//------------------NAVBAR STYLING----------------//
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  background-color: $header_background_color;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 20px 0;
+  list-style: none;
+  font-weight: bold;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+  position: relative;
+}
+
+nav a {
+  color: $font_color;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-color: $font_color;
+}
+
+nav a:hover {
+  color: $nav_bar_link_hover_color;
+  text-decoration: none;
+}
+
+
+nav a:before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: $font_color;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 150ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+.logo a {
+  color: $font_color;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.logo a:hover {
+  color: $nav_bar_link_hover_color;
+  text-decoration: none;
+}
+
+//------------------POSTS INDEX STYLING----------------//
