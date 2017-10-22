@@ -1,10 +1,11 @@
-
-
-<%= form_tag("/", :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-  <%= submit_tag "Search" %>
-<% end %>
-
+<div class="post-search-wrapper">
+  <div id="post-search">
+    <%= form_tag("/", :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class: "search"%>
+      <%= submit_tag "Search", class: 'btn btn-sm btn-info' %>
+    <% end %>
+  </div>
+</div>
 
 <% @posts.each do |post| %>
 <div id="posts_wrapper" class="skinny-wrapper">
@@ -14,11 +15,17 @@
       <span class="username"><%= post.user.username.upcase %></span>
       <br />
       <% if post.comments.last %>
-        <%= post.comments.last.created_at %>
+        <%= post.comments.last.created_at.strftime("%A, %d %b %Y") %>
+        <br />
+        <%= post.comments.last.created_at.strftime("%l:%M %p") %>
       <% else %>
-        <%= post.created_at %>
+        <%= post.created_at.strftime("%A, %d %b %Y") %>
+        <br />
+        <%= post.created_at.strftime("%l:%M %p") %>
       <% end %>
     </p>
+
+
 
     <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get%></h1>
       <!-- <h5 class="content"><%= post.content %></h5> -->
