@@ -1,3 +1,8 @@
+<div class="header">
+  Articles
+  <hr>
+</div>
+
 <div class="post-search-wrapper">
   <div id="post-search">
     <%= form_tag("/", :method => "get", id: "search-form") do %>
@@ -9,6 +14,8 @@
 
 <% @posts.each do |post| %>
 <div id="posts_wrapper" class="skinny-wrapper">
+
+  <hr>
   <div class="post">
 
     <p class="date">
