@@ -1,35 +1,75 @@
-<h1><%= @post.title %></h1>
-<h2><%= @post.user.username %></h2>
-<h2><%= @post.content %></h2>
-<%= image_tag @post.post_image.url %>
-
-
-
-<% if @post.tags.first %>
-  <% @post.tags.each do |tag| %>
-    Tags: <%= tag.title %>
-  <% end %>
-<% end %>
-
-  <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-    <%= link_to "Delete", "/post/#{@post.id}", method: :delete, class: 'btn btn-danger' %>
-    <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get, class: 'btn btn-info' %>
-  <% end %>
-
-  <% @comments.each do |comment| %>
-    <h6><%= comment.user.username %></h2>
-    <h6><%= comment.content %></h5>
-    <a href="../comment/<%= comment.id %>/edit">Edit</a>
-    <%= link_to "Delete", "/comment/#{ comment.id }", method: :delete %>
-  <% end %>
-  <% if current_user %>
-    <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
-      <%= f.hidden_field :post_id, value: @post.id %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.label :content %>:
-      <%= f.text_field :content %><br />
-      <%= f.submit %>
+<div class="post-header">
+  <%= @post.title %>
+  <br />
+  <div class="post-info">
+    Views: <%= @post.visit_count %>
+    <br />
+    <% if @post.comments.last %>
+      <%= @post.comments.last.created_at.strftime("%A, %d %b %Y") %>
+      <%= @post.comments.last.created_at.strftime("%l:%M %p") %>
+    <% else %>
+      <%= @post.created_at.strftime("%A, %d %b %Y") %>
+      <%= @post.created_at.strftime("%l:%M %p") %>
     <% end %>
-  <%= link_to "Back", "/", method: :get, class: 'btn btn-success' %>
+    <br />
+    <% if @post.tags.first %>
+      <% @post.tags.each do |tag| %>
+        Tags: <%= tag.title %>
+      <% end %>
+    <% end %>
+  </div>
+  <hr>
+</div>
+
+<div class="container post-info-wrapper">
+
+  <div class="post-container">
+
+      <!-- <%= image_tag @post.post_image.url %> -->
+
+    <div class="username">
+      <%= @post.user.username %>
+    </div>
+    <br />
+    <%= @post.content %>
+
+      <% if current_user && current_user == @post.user || current_user && current_user.admin %>
+        <%= link_to "Delete", "/post/#{@post.id}", method: :delete %>
+        <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get %>
+      <% end %>
+    </div>
+</div>
+
+
+<% @comments.each do |comment| %>
+
+  <div class="container post-info-wrapper">
+    <hr>
+    <div class="comment-container">
+      <div class="user">
+        <%= comment.user.username %>
+      </div>
+      <%= comment.content %>
+      <br />
+      <% if current_user && current_user == comment.user || current_user && current_user.admin %>
+        <a href="../comment/<%= comment.id %>/edit">Edit</a>
+        <%= link_to "Delete", "/comment/#{ comment.id }", method: :delete %>
+      <% end %>
+    </div>
+
+  </div>
 <% end %>
-<h3>Visits: <%= @post.visit_count %></h3>
+
+<div class="container comment-input-wrapper">
+  <% if current_user %>
+      <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.text_area :content, :id => "message_area" %>
+            <br />
+              <%= f.submit "Comment", class: 'btn btn-sm btn-info' %>
+              <%= link_to "Back", "/", method: :get %>
+      <% end %>
+
+  <% end %>
+</div>
