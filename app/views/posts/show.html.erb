@@ -5,16 +5,17 @@
     Views: <%= @post.visit_count %>
     <br />
     <% if @post.comments.last %>
-      <%= @post.comments.last.created_at.strftime("%A, %d %b %Y") %>
-      <%= @post.comments.last.created_at.strftime("%l:%M %p") %>
+      <%= local_time(@post.comments.last.created_at, "%A, %d %b %Y") %>
+      <%= local_time(@post.comments.last.created_at, "%l:%M %p") %>
     <% else %>
-      <%= @post.created_at.strftime("%A, %d %b %Y") %>
-      <%= @post.created_at.strftime("%l:%M %p") %>
+      <%= local_time(@post.created_at, "%A, %d %b %Y") %>
+      <%= local_time(@post.created_at, "%l:%M %p") %>
     <% end %>
     <br />
     <% if @post.tags.first %>
+      Tags:
       <% @post.tags.each do |tag| %>
-        Tags: <%= tag.title %>
+        <%= tag.title %>
       <% end %>
     <% end %>
   </div>

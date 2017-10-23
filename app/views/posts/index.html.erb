@@ -22,19 +22,17 @@
       <span class="username"><%= post.user.username.upcase %></span>
       <br />
       <% if post.comments.last %>
-        <%= post.comments.last.created_at.strftime("%A, %d %b %Y") %>
-        <br />
-        <%= post.comments.last.created_at.strftime("%l:%M %p") %>
+        <%= local_time(post.comments.last.created_at, "%A, %d %b %Y") %>
+        <%= local_time(post.comments.last.created_at, "%l:%M %p") %>
       <% else %>
-        <%= post.created_at.strftime("%A, %d %b %Y") %>
-        <br />
-        <%= post.created_at.strftime("%l:%M %p") %>
+        <%= local_time(post.created_at, "%A, %d %b %Y") %>
+        <%= local_time(post.created_at, "%l:%M %p") %>
       <% end %>
     </p>
 
 
 
-    <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get%></h1>
+    <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get %></h1>
       <!-- <h5 class="content"><%= post.content %></h5> -->
 
     <p class="views">
@@ -44,6 +42,6 @@
       <%= post.comments.count %>
     </p>
   </div>
-  
+
 </div>
 <% end %>
