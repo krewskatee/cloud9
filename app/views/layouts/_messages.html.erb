@@ -7,6 +7,7 @@
   <% else %>
     <div class='alert alert-<%= "#{type}" %>'>
   <% end %>
-  <a href="#" class="close" data-dismiss="alert">&#215;</a>
-      <%= msg %>
+  <p class="alert-message">
+    <%= msg %>
+  </p>
 <% end %>

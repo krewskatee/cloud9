@@ -4,7 +4,8 @@
 $background_color: #FFFFFF;
 $font_color: #93A5A5;
 $link_color : black;
-$nav_bar_link_hover_color: #7E8C8D;
+$nav_bar_link_hover_color: #000;
+$link_hover_color: #7E8C8D;
 $header_background_color: #fff;
 
 //------------------GLOBAL STYLING----------------//
@@ -23,6 +24,22 @@ a:hover {
   text-decoration: none;
 }
 
+//------------------ALERTS STYLING----------------//
+
+#alert-wrapper {
+  .alert {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+  }
+  .alert-message {
+    padding: .66rem 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+}
 
 //------------------NAVBAR STYLING----------------//
 
@@ -121,7 +138,7 @@ nav a:hover::before {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid $nav_bar_link_hover_color;
+    border-top: 1px solid $link_hover_color;
     margin: 1.5em auto;
   }
 }
@@ -137,7 +154,6 @@ nav a:hover::before {
 
 .post {
   text-align: center;
-  // border-bottom: 2px solid $font_color;
   margin-bottom: 20px;
   margin-top: 20px;
 
@@ -160,7 +176,7 @@ nav a:hover::before {
   }
 
   a:hover {
-    color: $nav_bar_link_hover_color;
+    color: $link_hover_color;
   }
 }
 

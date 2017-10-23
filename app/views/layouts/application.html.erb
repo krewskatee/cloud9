@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <div id="alert-wrapper">
+      <div class="alerts">
+        <%= render 'layouts/messages' %>
+      </div>
+    </div>
     <%= include_gon %>
   <header>
     <div class="container">
@@ -20,8 +25,10 @@
           <li class="navbar-link">
             <a href="/">Home</a>
           </li>
+          <% if current_user %>
           <li class="navbar-link">
             <a href="/chats">Chat</a>
+          <% end %>
           </li>
           <% if !current_user %>
             <li class="navbar-link">
@@ -42,9 +49,6 @@
 
     <br/><br/><br/>
 
-      <div>
-        <%= render 'layouts/messages' %>
-      </div>
       <%= yield %>
   </body>
 </html>
