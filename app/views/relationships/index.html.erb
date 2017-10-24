@@ -2,6 +2,7 @@
 
 <% @friends.each do |friend| %>
   <h5><%= friend.friend.username %></h5>
+  <%= link_to "Decline", "/friends/#{friend.id}", method: :delete, class: 'btn btn-danger' %>
 <% end %>
 
 <h1>Friend Requests</h1>

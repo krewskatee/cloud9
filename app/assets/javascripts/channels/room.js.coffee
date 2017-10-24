@@ -7,6 +7,6 @@ App.room = App.cable.subscriptions.create {channel: "RoomChannel", room:  gon.ch
 
   received: (data) ->
     if data.friend_request_content
-      alert("You have a friend request!")
+        alert("You have received a new friends request!");
     unless data.content.blank?
       $('#message-wr').append '<div class="message-content">'+ data.username+ ': ' + data.content + '</div>'

@@ -25,6 +25,7 @@ gem "bootstrap_flash_messages", "~> 1.0.1"
 gem "paperclip", "~> 5.0.0"
 gem 'pg_search'
 gem 'local_time'
+gem 'vuejs-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'gon'

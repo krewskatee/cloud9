@@ -15,7 +15,7 @@ class RelationshipsController < ApplicationController
       flash[:danger] = "User does not exist."
       redirect_to '/friends/new'
     else
-      @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id])
+      @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id], status: relationship_params[:status])
       if friends_pending? || befrienders_pending?
         flash[:info] = "Friendship Pending"
         redirect_to '/friends/new'
@@ -23,8 +23,9 @@ class RelationshipsController < ApplicationController
         flash[:info] = "You are already friends with this person"
         redirect_to '/friends/new'
       elsif self_friend?
-        flash[:info] = "You cannot be friends with yourself."
         redirect_to '/friends/new'
+        flash[:info] = "You cannot be friends with yourself."
+
       else
         if @relationship.save
           gon.send_id = @relationship.friend_id
@@ -33,6 +34,8 @@ class RelationshipsController < ApplicationController
                                       friend_request_content: true
 
           head :ok
+          redirect_to '/friends/new'
+          flash[:success] = "Sent friends request!"
         end
       end
     end

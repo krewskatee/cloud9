@@ -1,24 +1,32 @@
-<div class="add-chat">
-  <%= form_for @chat, url: "/chats", method: :post do |f| %>
-    <%= f.text_field :name %>
-    <%= f.submit "Create Chat", class: "btn btn-large btn-primary"%>
-  <% end %>
-</div>
-
-<% @chats.each do |chat| %>
-<h1 class="chat_link"><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></h1>
-<% end %>
-
-<h1>Friends</h1>
-<% @friends.each do |friend| %>
-  <h5><%= friend.friend.username %></h5>
-<% end %>
-
-<div id="friends-list">
-  <h1>Friend Requests</h1>
-  <% @friend_requests.each do |friend_request| %>
-    <h5><%= friend_request.befriender.username %></h5>
-    <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch, class: 'btn btn-success' %>
-    <%= link_to "Decline", "/friends/#{friend_request.id}", method: :delete, class: 'btn btn-danger' %>
-  <% end %>
+<div class="main">
+  <div class="add-chat">
+    <%= form_for @chat, url: "/chats", method: :post do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit "Create Chat", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+  <h5>Friends</h5>
+    <ul>
+      <% @friends.each do |friend| %>
+        <li><%= friend.friend.username %></li>
+      <% end %>
+    </ul>
+  <div class="listings_direct-messages">
+    <h5>Friend Requests</h5>
+    <ul class="channel_list">
+      <% @friend_requests.each do |friend_request| %>
+        <li>
+          <%= friend_request.befriender.username %> |
+          <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch %>
+          <%= link_to "Decline", "/friends/#{friend_request.id}", method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+    <h5>Channels</h5>
+    <ul>
+      <% @chats.each do |chat| %>
+        <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

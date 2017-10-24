@@ -12,7 +12,8 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require jquery3
+//= require jquery
+//= require vue
 //= require popper
 //= require bootstrap
 //= require local-time
