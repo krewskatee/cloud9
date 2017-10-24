@@ -1,81 +1,83 @@
-<div class="post-header">
-  <%= @post.title %>
-  <br />
-  <div class="post-info">
-    Views: <%= @post.visit_count %>
+<div id="app">
+  <div class="post-header">
+    <%= @post.title %>
     <br />
-    <% if @post.comments.last %>
-      <%= local_time(@post.comments.last.created_at, "%A, %d %b %Y") %>
-      <%= local_time(@post.comments.last.created_at, "%l:%M %p") %>
-    <% else %>
-      <%= local_time(@post.created_at, "%A, %d %b %Y") %>
-      <%= local_time(@post.created_at, "%l:%M %p") %>
-    <% end %>
-    <br />
-    <% if @post.tags.first %>
-      Tags:
-      <% @post.tags.each do |tag| %>
-        <%= tag.title %>
+    <div class="post-info">
+      Views: <%= @post.visit_count %>
+      <br />
+      <% if @post.comments.last %>
+        <%= local_time(@post.comments.last.created_at, "%A, %d %b %Y") %>
+        <%= local_time(@post.comments.last.created_at, "%l:%M %p") %>
+      <% else %>
+        <%= local_time(@post.created_at, "%A, %d %b %Y") %>
+        <%= local_time(@post.created_at, "%l:%M %p") %>
       <% end %>
-    <% end %>
+      <br />
+      <% if @post.tags.first %>
+        Tags:
+        <% @post.tags.each do |tag| %>
+          <%= tag.title %>
+        <% end %>
+      <% end %>
+    </div>
+    <hr>
   </div>
-  <hr>
-</div>
-
-<div class="container post-info-wrapper">
-
-  <div class="post-container">
-
-      <!-- <%= image_tag @post.post_image.url %> -->
-
-    <div class="username">
-      <%= @post.user.username %>
-    </div>
-    <br />
-    <%= @post.content %>
-
-      <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-        <%= link_to "Delete", "/post/#{@post.id}", method: :delete %>
-        <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get %>
-      <% end %>
-    </div>
-</div>
-
-
-<% @comments.each do |comment| %>
 
   <div class="container post-info-wrapper">
-    <hr>
-    <div class="comment-container">
-      <div class="user">
-        <%= comment.user.username %>
+
+    <div class="post-container">
+
+        <!-- <%= image_tag @post.post_image.url %> -->
+
+      <div class="username">
+        <%= @post.user.username %>
       </div>
-      <%= comment.content %>
       <br />
-      <% if current_user && current_user == comment.user || current_user && current_user.admin %>
-        <a href="../comment/<%= comment.id %>/edit">Edit</a>
-        <%= render 'comments/comment_edit_form' %>
-        <%= link_to "Delete", "/comment/#{ comment.id }", method: :delete %>
-      <% end %>
-    </div>
+      <%= @post.content %>
 
+        <% if current_user && current_user == @post.user || current_user && current_user.admin %>
+          <%= link_to "Delete", "/post/#{@post.id}", method: :delete %>
+          <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get %>
+        <% end %>
+      </div>
   </div>
-<% end %>
 
-<div class="container comment-input-wrapper">
-  <% if current_user %>
-      <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
-        <%= f.hidden_field :post_id, value: @post.id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.text_area :content, :id => "message_area" %>
-            <br />
-              <%= f.submit "Comment", class: 'btn btn-sm btn-info' %>
-              <%= link_to "Back", "/", method: :get %>
-      <% end %>
 
+  <% @comments.each do |comment| %>
+
+    <div class="container post-info-wrapper">
+      <hr>
+      <div class="comment-container">
+        <div class="user">
+          <%= comment.user.username %>
+        </div>
+        <div class="comment-content">
+          <%= comment.content %>
+        </div>
+        <% if current_user && current_user == comment.user || current_user && current_user.admin %>
+          <div class="comment-delete">
+            <a v-on:click="editToggle($event)" class="edit-button">Edit</a>
+            <%= link_to "Delete", "/comment/#{ comment.id }", method: :delete %>
+          </div>
+          <div class="edit">
+            <%= render 'posts/comment_edit_form', commentid: comment.id, content: comment.content %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
   <% end %>
-</div>
 
-<div id="app">
-  {{ message }}
+  <div class="container comment-input-wrapper">
+    <% if current_user %>
+        <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.text_area :content, :id => "message_area" %>
+              <br />
+                <%= f.submit "Comment", class: 'btn btn-sm btn-info' %>
+                <%= link_to "Back", "/", method: :get %>
+        <% end %>
+    <% end %>
+  </div>
 </div>
