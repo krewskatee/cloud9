@@ -43,10 +43,10 @@ class PostsController < ApplicationController
   end
 
   def show
-
     @comment = Comment.new
     @post = Post.find(params[:id])
-    gon.lol = @post.id
+    gon.post_id = @post.id
+    gon.current_user_id = current_user.id
     @comments = @post.comments.order("created_at")
     ip_address = request.remote_ip
     visited = false

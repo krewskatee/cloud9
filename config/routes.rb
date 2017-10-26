@@ -8,6 +8,17 @@ Rails.application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
+  namespace :api do
+    namespace :v1 do
+      get '/post/:id' => 'posts#show'
+      get '/comment' => 'comments#index'
+      get '/comment/:id' => 'comments#show'
+      post '/comment' => 'comments#create'
+      patch '/comment/:id' => 'comments#update'
+      delete '/comment/:id' => 'comments#destroy'
+    end
+  end
+
   post '/chat_messages' => 'chat_messages#create'
 
 
@@ -24,11 +35,14 @@ Rails.application.routes.draw do
 
   get '/post' => 'posts#new'
   post '/post' => 'posts#create'
+  delete '/post/:id' => 'posts#destroy'
+
+  post '/comment' => 'comments#create'
   get '/comment/:id/edit' => 'comments#edit'
   patch '/comment/:id' => 'comments#update'
   delete '/comment/:id' => 'comments#destroy'
-  post '/comment' => 'comments#create'
-  delete '/post/:id' => 'posts#destroy'
+
+
 
   get '/friends' => 'relationships#index'
   get '/friends/new' => 'relationships#new'

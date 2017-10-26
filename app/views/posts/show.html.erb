@@ -68,6 +68,8 @@
     </div>
   <% end %>
 
+
+
   <div class="container comment-input-wrapper">
     <% if current_user %>
         <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
@@ -79,5 +81,15 @@
                 <%= link_to "Back", "/", method: :get %>
         <% end %>
     <% end %>
+  </div>
+
+  <div class="add-comment">
+    <h2>Add an Comment</h2>
+     <input v-model="content">
+    <button v-on:click="addComment()">Add Comment</button>
+  </div>
+
+  <div v-for="comment in post_comments">
+    {{ comment.content }}
   </div>
 </div>

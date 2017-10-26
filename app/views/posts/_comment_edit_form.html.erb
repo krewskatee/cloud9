@@ -1,0 +1,4 @@
+<%= form_for @comment, url: "/comment/#{commentid}", method: :patch, html: { multipart: true } do |f| %>
+  <%= f.text_area :content, value: content, class: "message-edit-area"%><br />
+  <%= f.submit "Update", class: "link-button"%>
+<% end %>
