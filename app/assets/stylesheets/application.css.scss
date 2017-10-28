@@ -87,6 +87,7 @@ a:hover {
 
 //------------------NAVBAR STYLING----------------//
 
+
 textarea.message-edit-area {
   width: 100%;
   height: 75px;
@@ -369,4 +370,18 @@ nav a:hover::before {
   ul {
     padding: 0;
   }
+}
+
+//------------------NEW POST STYLING----------------//
+.new-post-header {
+  text-align: center;
+}
+textarea#message-edit-area {
+  width: 100%;
+  height: 75px;
+  resize: none;
+  border-color: #C6C9CB;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  border-width: 1px;
 }

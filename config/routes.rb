@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/post/:id' => 'posts#show'
+      get '/posts' => 'posts#index'
       get '/comment' => 'comments#index'
       get '/comment/:id' => 'comments#show'
       post '/comment' => 'comments#create'

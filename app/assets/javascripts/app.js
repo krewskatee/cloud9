@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
           }.bind(this)).fail(function(response) {
             $('.error-wrapper').fadeIn().fadeOut(6000);
            this.errors = (response.responseJSON.errors);
-          }.bind(this));
+         }.bind(this)).success(function() {
+            console.log("success")
+         });
       },
       editToggle: function(comment) {
         comment.commentVisible = !comment.commentVisible;
