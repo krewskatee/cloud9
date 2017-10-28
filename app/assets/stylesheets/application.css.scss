@@ -10,6 +10,18 @@ $header_background_color: #fff;
 
 //------------------GLOBAL STYLING----------------//
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-to
+
+{
+  opacity: 0
+}
+
 .link-button {
   background: none;
   border: none;
@@ -43,7 +55,22 @@ a:hover {
 
 //------------------ALERTS STYLING----------------//
 
-#alert-wrapper {
+.alert-wrapper {
+  .alert {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+  }
+  .alert-message {
+    padding: .66rem 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+
+.error-wrapper {
   .alert {
     position: absolute;
     width: 100%;
@@ -233,7 +260,6 @@ nav a:hover::before {
 }
 
 .edit {
-  display: none;
   padding-top: 10px;
 }
 

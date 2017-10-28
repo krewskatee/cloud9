@@ -1,4 +1,14 @@
 <div id="app">
+
+
+  <div class="error-wrapper">
+    <div class="alert alert-danger" v-for="error in errors">
+      <p class="alert-message">
+        {{ error }}
+      </p>
+    </div>
+  </div>
+
   <div class="post-header">
     <%= @post.title %>
     <br />
@@ -24,11 +34,10 @@
   </div>
 
   <div class="container post-info-wrapper">
-
     <div class="post-container">
-
-        <!-- <%= image_tag @post.post_image.url %> -->
-
+      <% if @post.post_image.url != "/images/original/missing.png" %>
+        <%= image_tag @post.post_image.url %>
+      <% end %>
       <div class="username">
         <%= @post.user.username %>
       </div>
@@ -43,53 +52,37 @@
   </div>
 
 
-  <% @comments.each do |comment| %>
-
-    <div class="container post-info-wrapper">
+    <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
+
       <div class="comment-container">
         <div class="user">
-          <%= comment.user.username %>
+          {{ comment.username }}
         </div>
-        <div class="comment-content">
-          <%= comment.content %>
+      <transition name="fade">
+        <div class="comment-content" v-if="comment.commentVisible === false">
+            {{ comment.content }}
         </div>
-        <% if current_user && current_user == comment.user || current_user && current_user.admin %>
-          <div class="comment-delete">
-            <a v-on:click="editToggle($event)" class="edit-button">Edit</a>
-            <%= link_to "Delete", "/comment/#{ comment.id }", method: :delete %>
+      </transition>
+          <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">
+            <a v-on:click="editToggle(comment)" class="edit-button">Edit</a>
+            <a v-on:click="deleteComment(comment)" class="edit-button">Delete</a>
           </div>
-          <div class="edit">
-            <%= render 'posts/comment_edit_form', commentid: comment.id, content: comment.content %>
-          </div>
-        <% end %>
+          <transition name="fade">
+            <div class="edit" v-if="comment.commentVisible">
+              <textarea class="message-edit-area" id="text-area">{{ comment.content }}</textarea>
+              <a v-on:click="updateComment(comment)" class="edit-button">Update</a>
+              <a v-on:click="editToggle(comment)" class="edit-button">Cancel</a>
+            </div>
+          </transition>
       </div>
-
     </div>
-  <% end %>
-
-
 
   <div class="container comment-input-wrapper">
     <% if current_user %>
-        <%= form_for @comment, url: "/comment", method: :post, html: { multipart: true } do |f| %>
-          <%= f.hidden_field :post_id, value: @post.id %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.text_area :content, :id => "message_area" %>
-              <br />
-                <%= f.submit "Comment", class: 'btn btn-sm btn-info' %>
-                <%= link_to "Back", "/", method: :get %>
-        <% end %>
+      <textarea v-model="content" id="message_area"></textarea>
+      <button v-on:click="addComment()" class="btn btn-sm btn-info">Comment</button>
+      <%= link_to "Back", "/", method: :get %>
     <% end %>
-  </div>
-
-  <div class="add-comment">
-    <h2>Add an Comment</h2>
-     <input v-model="content">
-    <button v-on:click="addComment()">Add Comment</button>
-  </div>
-
-  <div v-for="comment in post_comments">
-    {{ comment.content }}
   </div>
 </div>

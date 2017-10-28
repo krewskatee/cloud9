@@ -3,20 +3,40 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: '#app',
     data: {
       post_comments: [],
-      comments: [],
       content: "",
-      errors: []
+      errors: [],
+      current_user_id: gon.current_user_id
     },
     mounted: function() {
       $.get(`/api/v1/post/${gon.post_id}.json`, function(data) {
         this.post_comments = data['comments'];
       }.bind(this));
-
-      $.get(`/api/v1/comment.json`, function(data) {
-        this.comments = data;
-      }.bind(this));
     },
     methods: {
+      updateComment: function(comment, comment_content) {
+        $.ajax({
+          url: `/api/v1/comment/${comment.id}.json`,
+          type: 'PATCH',
+          data: JSON.stringify({ content: $('#text-area').val(), _method:'patch' }),
+          contentType: 'application/json',
+          success: function(result) {
+            this.post_comments = result;
+          }.bind(this)
+        }).fail(function(response) {
+           this.errors = (response.responseJSON.errors);
+          }.bind(this));
+      },
+      deleteComment: function(comment) {
+        $.ajax({
+          url: `/api/v1/comment/${comment.id}.json`,
+          type: 'DELETE',
+          contentType: 'application/json',
+          success: function(result) {
+            this.post_comments = result;
+            location.reload();
+          }.bind(this)
+        });
+      },
       addComment: function() {
         var newComment = {
             content: this.content,
@@ -24,27 +44,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
             user_id: gon.current_user_id
           };
           $.post('/api/v1/comment.json', newComment, function(newComment) {
-           this.comments.push(newComment);
            this.post_comments.push(newComment);
            this.content = "";
           }.bind(this)).fail(function(response) {
-           console.log("fail")
+            $('.error-wrapper').fadeIn().fadeOut(6000);
+           this.errors = (response.responseJSON.errors);
           }.bind(this));
       },
-      editToggle: function($event) {
-        var targetParent = $($event.target).parent()
-        if($($event.target).text() === "Cancel") {
-          $($event.target).text("Edit")
-        } else {
-          $($event.target).text("Cancel")
-        }
-        targetParent.closest("div").prev(".comment-content").toggle();
-        targetParent.closest("div").prev(".comment-delete").fadeToggle();
-        $($event.target).closest("div").next(".edit").fadeToggle();
+      editToggle: function(comment) {
+        comment.commentVisible = !comment.commentVisible;
+      },
+      add: function() {
+        var newComment = {
+
+        };
+        jQuery.ajax({
+          url: '/api/v1/comment.json',
+          data: "song_id=" + song_id + "&title=" + title,
+          type: "POST",
+          success: function(data) {
+            alert("Successful");
+          },
+          failure: function() {
+            alert("Unsuccessful");
+          }
+        });
       }
     },
     computed: {
 
     }
   });
+});
+
+$(document).ready(function() {
+    $('.comment-container').fadeIn("slow");
 });
