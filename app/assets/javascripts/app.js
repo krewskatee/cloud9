@@ -62,8 +62,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
         comment.commentVisible = !comment.commentVisible;
       },
       addFriendToggle: function() {
-        console.log("lol")
-        $('#friends-form').fadeToggle()
+        $('#friends-form').fadeToggle();
+        $('.fa-minus').fadeIn();
+        $('.fa-plus').hide();
+      },
+
+      addToggle: function() {
+        $('#friends-form').fadeToggle();
+        $('.fa-minus').hide();
+        $('.fa-plus').fadeIn();
       }
     },
     computed: {

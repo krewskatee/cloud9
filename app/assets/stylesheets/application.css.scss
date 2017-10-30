@@ -1,4 +1,6 @@
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 //------------------GLOBAL VARIABLES----------------//
 $background_color: #FFFFFF;
@@ -8,10 +10,6 @@ $nav_bar_link_hover_color: #000;
 $link_hover_color: #7E8C8D;
 $header_background_color: #fff;
 //------------------GLOBAL STYLING----------------//
-
-#friends-form {
-  display: none;
-}
 
 .form-header {
   text-align: center;
@@ -389,4 +387,22 @@ textarea#message-edit-area {
   border-radius: 5px;
   margin-bottom: 5px;
   border-width: 1px;
+}
+
+//------------------CHAT INDEX STYLING----------------//
+
+#friends-form {
+  display: none;
+}
+
+.fa-plus:hover {
+  cursor:pointer;
+}
+
+.fa-minus {
+  display: none;
+}
+
+.fa-minus:hover {
+  cursor:pointer;
 }
