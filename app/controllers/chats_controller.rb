@@ -1,7 +1,8 @@
 class ChatsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!
 
   def index
+    @relationship = Relationship.new
     @friends = current_user.accepted_friends
     @friend_requests = current_user.friend_requests
     gon.user_id = current_user.id

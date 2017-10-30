@@ -61,7 +61,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       editToggle: function(comment) {
         comment.commentVisible = !comment.commentVisible;
       },
-
+      addFriendToggle: function() {
+        console.log("lol")
+        $('#friends-form').fadeToggle()
+      }
     },
     computed: {
 
