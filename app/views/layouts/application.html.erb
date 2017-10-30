@@ -39,6 +39,9 @@
             </li>
           <% else %>
             <li class="navbar-link">
+              <a href="/users/edit">Account</a>
+            </li>
+            <li class="navbar-link">
               <a href="/logout">Logout</a>
             </li>
           <% end %>
@@ -48,6 +51,8 @@
   </header>
 
   <br/><br/><br/>
-  <%= yield %>
+  <div id="app">
+    <%= yield %>
+  <div>
   </body>
 </html>

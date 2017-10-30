@@ -19,6 +19,12 @@ class ChatsController < ApplicationController
   end
 
   def show
+    @relationship = Relationship.new
+    @friends = current_user.accepted_friends
+    @friend_requests = current_user.friend_requests
+    gon.user_id = current_user.id
+    @chats = current_user.chats
+    @chat = Chat.new
     if !current_user.chats.where("chat_id = #{params[:id]}").empty?
       @user_chat = UserChat.new()
       gon.user_id = current_user.id
