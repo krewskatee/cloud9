@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           success: function(result) {
             console.log(result)
             this.post_comments = result;
+            location.reload();
           }.bind(this)
         });
       },
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
            this.errors = (response.responseJSON.errors);
          }.bind(this)).success(function() {
             console.log("success")
+            $('.comment-content').fadeIn(1000);
          });
       },
       editToggle: function(comment) {
