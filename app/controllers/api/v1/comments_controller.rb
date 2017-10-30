@@ -24,7 +24,7 @@ class Api::V1::CommentsController < ApplicationController
       @post_id = @comment.post.id
       @post_comments = @post.comments.sort_by(&:created_at)
       if @comment.save
-        render :index
+        render 'post_comments.json.jbuilder'
       else
         render json: { errors: @comment.errors.full_messages }, status: 422
       end
@@ -41,7 +41,7 @@ class Api::V1::CommentsController < ApplicationController
       @post = comment.post
       @post_comments = @post.comments.sort_by(&:created_at)
       comment.destroy
-      render :index
+      render 'post_comments.json.jbuilder'
     end
 
 end

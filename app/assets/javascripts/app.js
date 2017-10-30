@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             this.post_comments = result;
           }.bind(this)
         }).fail(function(response) {
+          console.log('fail')
+          $('.error-wrapper').fadeOut(6000);
            this.errors = (response.responseJSON.errors);
           }.bind(this));
       },
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
            this.post_comments.push(newComment);
            this.content = "";
           }.bind(this)).fail(function(response) {
-            $('.error-wrapper').fadeIn().fadeOut(6000);
+            $('.error-wrapper').fadeOut(6000);
            this.errors = (response.responseJSON.errors);
          }.bind(this)).success(function() {
             console.log("success")
@@ -63,8 +65,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     }
   });
-});
-
-$(document).ready(function() {
-    $('.comment-container').fadeIn("slow");
 });
