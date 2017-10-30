@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       $.get(`/api/v1/post/${gon.post_id}.json`, function(data) {
-        this.post_comments = data['comments'];
+        this.post_comments = data.comments;
       }.bind(this));
     },
+
     methods: {
       updateComment: function(comment, comment_content) {
         $.ajax({
@@ -32,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
           type: 'DELETE',
           contentType: 'application/json',
           success: function(result) {
+            console.log(result)
             this.post_comments = result;
-            location.reload();
           }.bind(this)
         });
       },
@@ -56,22 +57,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       editToggle: function(comment) {
         comment.commentVisible = !comment.commentVisible;
       },
-      add: function() {
-        var newComment = {
 
-        };
-        jQuery.ajax({
-          url: '/api/v1/comment.json',
-          data: "song_id=" + song_id + "&title=" + title,
-          type: "POST",
-          success: function(data) {
-            alert("Successful");
-          },
-          failure: function() {
-            alert("Unsuccessful");
-          }
-        });
-      }
     },
     computed: {
 

@@ -20,5 +20,8 @@
 //= require_tree .
 
 $(document).ready(function(){
+  setTimeout(function() {
+
+  }, 2000);
     $('.alert').fadeIn(500).delay(1000).fadeOut(1000);
 });

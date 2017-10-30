@@ -4,9 +4,10 @@
   <% elsif type == "alert" %>
     <div class="alert alert-danger">
   <% else %>
-    <div class='alert alert-<%= "#{type}" %>'>
+    <div class="alert alert-<%= type %>">
   <% end %>
-  <p class="alert-message">
-    <%= msg %>
-  </p>
+    <p class="alert-message">
+      <%= msg %>
+    </p>
+  </div>
 <% end %>

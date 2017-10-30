@@ -43,8 +43,6 @@ Rails.application.routes.draw do
   patch '/comment/:id' => 'comments#update'
   delete '/comment/:id' => 'comments#destroy'
 
-
-
   get '/friends' => 'relationships#index'
   get '/friends/new' => 'relationships#new'
   post '/friends' => 'relationships#create'

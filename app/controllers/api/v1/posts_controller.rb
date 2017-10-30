@@ -15,6 +15,4 @@ class Api::V1::PostsController < ApplicationController
     gon.current_user_id = current_user.id
     @comments = @post.comments.order("created_at")
   end
-
-
 end

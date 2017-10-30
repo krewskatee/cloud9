@@ -6,6 +6,7 @@
     <% end %>
   </div>
   <h5>Friends</h5>
+  <%= render "form", purpose: "Create", url: "/relationships", verb: :post %>
     <ul>
       <% @friends.each do |friend| %>
         <li><%= friend.friend.username %></li>

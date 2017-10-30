@@ -59,11 +59,11 @@
         <div class="user">
           {{ comment.username }}
         </div>
-      <transition name="fade">
-        <div class="comment-content" v-if="comment.commentVisible === false">
-            {{ comment.content }}
-        </div>
-      </transition>
+
+          <div class="comment-content" v-if="comment.commentVisible === false">
+              {{ comment.content }}
+          </div>
+
           <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">
             <a v-on:click="editToggle(comment)" class="edit-button">Edit</a>
             <a v-on:click="deleteComment(comment)" class="edit-button">Delete</a>
@@ -71,7 +71,7 @@
           <transition name="fade">
             <div class="edit" v-if="comment.commentVisible">
               <textarea class="message-edit-area" id="text-area">{{ comment.content }}</textarea>
-              <a v-on:click="updateComment(comment)" class="edit-button">Update</a>
+              <a v-on:click="editToggle(comment);updateComment(comment)" class="edit-button">Update</a>
               <a v-on:click="editToggle(comment)" class="edit-button">Cancel</a>
             </div>
           </transition>

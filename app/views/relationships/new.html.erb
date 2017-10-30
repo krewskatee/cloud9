@@ -1,9 +1,1 @@
-<%= form_for @relationship, url: '/friends', remote: true, method: :post do |f| %>
-
-  <%= f.hidden_field :befriender_id, value: current_user.id %>
-  <%= f.hidden_field :status, value: "pending" %>
-
-  <%= f.text_field :friend_id %><br />
-
-  <%= f.submit "Send Friend Request" %>
-<% end %>
+<%= render "relationship_form", purpose: "Create", url: "/post", verb: :post %>

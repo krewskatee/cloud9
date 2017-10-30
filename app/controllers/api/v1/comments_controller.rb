@@ -20,9 +20,11 @@ class Api::V1::CommentsController < ApplicationController
     def update
       @comment = Comment.find(params[:id])
       @comment.update_attributes(content: params[:content])
+      @post = @comment.post
       @post_id = @comment.post.id
+      @post_comments = @post.comments.sort_by(&:created_at)
       if @comment.save
-        render json: {}, status: 200
+        render :index
       else
         render json: { errors: @comment.errors.full_messages }, status: 422
       end
@@ -36,7 +38,10 @@ class Api::V1::CommentsController < ApplicationController
     def destroy
       comment = Comment.find(params[:id])
       post_id = comment.post.id
+      @post = comment.post
+      @post_comments = @post.comments.sort_by(&:created_at)
       comment.destroy
+      render :index
     end
 
 end
