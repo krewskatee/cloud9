@@ -63,14 +63,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
       },
       addFriendToggle: function() {
         $('#friends-form').fadeToggle();
-        $('.fa-minus').fadeIn();
-        $('.fa-plus').hide();
+        $('.fa-friend-minus').fadeIn();
+        $('.fa-friend-plus').hide();
       },
 
       addToggle: function() {
         $('#friends-form').fadeToggle();
-        $('.fa-minus').hide();
-        $('.fa-plus').fadeIn();
+        $('.fa-friend-minus').hide();
+        $('.fa-friend-plus').fadeIn();
+      },
+      chatFormShow: function() {
+        $('.add-chat').fadeToggle();
+        $('.chat-form-minus').fadeIn();
+        $('.chat-form-plus').hide();
+      },
+      chatFormHide: function() {
+        $('.add-chat').fadeToggle();
+        $('.chat-form-minus').hide();
+        $('.chat-form-plus').fadeIn();
       }
     },
     computed: {

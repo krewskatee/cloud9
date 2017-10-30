@@ -58,7 +58,7 @@
           {{ comment.username }}
         </div>
 
-          <div class="comment-content">
+          <div class="comment-content" v-if="comment.commentVisible === false">
               {{ comment.content }}
           </div>
 

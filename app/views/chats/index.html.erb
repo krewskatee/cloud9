@@ -1,17 +1,10 @@
 
 <div class="main">
   <div id="app">
-    <div class="add-chat">
-      <%= form_for @chat, url: "/chats", method: :post do |f| %>
-        <%= f.text_field :name %>
-        <%= f.submit "Create Chat", class: "btn btn-large btn-primary"%>
-      <% end %>
-    </div>
-    <h5>Friends</h5>
 
-    Add Friend
-    <i class="fa fa-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
-    <i class="fa fa-minus" v-on:click="addToggle()" aria-hidden="true"></i>
+    Friends
+    <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
+    <i class="fa fa-minus fa-friend-minus" v-on:click="addToggle()" aria-hidden="true"></i>
 
     <div id="friends-form">
       <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
@@ -22,7 +15,25 @@
         <% end %>
       </ul>
     <div class="listings_direct-messages">
-      <h5>Friend Requests</h5>
+
+      Channels
+
+      <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
+      <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
+
+      <div class="add-chat">
+        <%= form_for @chat, url: "/chats", method: :post do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit "Create Chat", class: "btn btn-sm btn-info"%>
+        <% end %>
+      </div>
+      <ul>
+        <% @chats.each do |chat| %>
+          <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></li>
+        <% end %>
+      </ul>
+
+      Friend Requests
       <ul class="channel_list">
         <% @friend_requests.each do |friend_request| %>
           <li>
@@ -30,12 +41,6 @@
             <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch %>
             <%= link_to "Decline", "/friends/#{friend_request.id}", method: :delete %>
           </li>
-        <% end %>
-      </ul>
-      <h5>Channels</h5>
-      <ul>
-        <% @chats.each do |chat| %>
-          <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></li>
         <% end %>
       </ul>
     </div>
