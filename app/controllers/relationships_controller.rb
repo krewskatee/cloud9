@@ -25,7 +25,6 @@ class RelationshipsController < ApplicationController
       elsif self_friend?
         redirect_to '/chats'
         flash[:info] = "You cannot be friends with yourself."
-
       else
         if @relationship.save
           gon.send_id = @relationship.friend_id
@@ -34,7 +33,6 @@ class RelationshipsController < ApplicationController
                                       friend_request_content: true
 
           head :ok
-          redirect_to '/chats'
           flash[:success] = "Sent friends request!"
         end
       end
