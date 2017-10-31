@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   has_many :post_visits
   has_many :visits, through: :post_visits
 
-  has_attached_file :post_image, styles: { large: "600x600>",medium: "300x300>", thumb: "75x75>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :post_image, styles: { large: "600x600>", tiny: "25x25>", thumb: "75x75>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :post_image, content_type: /\Aimage\/.*\z/
   #validates_with AttachmentPresenceValidator, attributes: :post_image
 
