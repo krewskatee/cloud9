@@ -71,10 +71,13 @@ class PostsController < ApplicationController
     @post.assign_attributes(allowed_params_post)
     if @post.save
       array = allowed_params_tags[:title].split(" ")
-      if array == []
+
+      if array.empty?
+        ForumTag.where(post_id: @post.id).destroy_all
+      else
         ForumTag.where(post_id: @post.id).destroy_all
         array.each do |tag|
-          ForumTag.where(post_id: @post.id).destroy_all
+
           find = Tag.find_by(title: tag)
           if find
             forum_tag = ForumTag.create(
@@ -104,6 +107,13 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+
+    @tag_array = []
+    @post.tags.each do |tag|
+      @tag_array << tag.title
+    end
+
+    @tag_collection = @tag_array.join(" ")
   end
 
   def destroy

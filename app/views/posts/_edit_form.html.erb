@@ -1,12 +1,10 @@
 <%= form_for @post, url: "/post/#{ @post.id }", method: :patch, html: { multipart: true } do |f| %>
-  <%= f.label :tags %>:
+  <%= f.label "Tags (seperate each tag by spaces)" %>:
 
   <%= fields_for :tags do |f| %>
-    <% @post.tags.each do |tag| %>
-     <%= f.text_field :title, value: tag.title, class: 'form-control input_field' %>
-    <% end %>
+     <%= f.text_field :title, value: @tag_collection, class: 'form-control input_field' %>
   <% end %>
-  
+
   <br />
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.label :title %>:
