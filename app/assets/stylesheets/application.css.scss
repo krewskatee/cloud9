@@ -245,9 +245,16 @@ nav a:hover::before {
   max-width: 760px;
   margin: 0 auto;
 
+  .new-post {
+    display: inline;
+    padding-left: 10%;
+    margin-right: 35%;
+  }
+
   #post-search {
-    padding-left: 59%;
+
     width: auto;
+    display: inline-block;
     .search {
       border: none;
       border-bottom: 1px solid;

@@ -40,8 +40,8 @@
         <%= @post.user.username %>
         <div class="post-options">
           <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-            <%= link_to "Edit Post", "/post/#{@post.id}/edit", method: :get %>
-            <%= link_to "Delete Post", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
+            <%= link_to "Edit Article", "/post/#{@post.id}/edit", method: :get %>
+            <%= link_to "Delete Article", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
           <% end %>
         </div>
       </div>

@@ -4,11 +4,11 @@
 </div>
 
 <div class="post-search-wrapper">
+  <div class="new-post">
+    <button class="btn btn-sm btn-info">Create Article</button>
+  </div>
   <div id="post-search">
-    <%= form_tag("/", :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class: "search"%>
-      <%= submit_tag "Search", class: 'btn btn-sm btn-info' %>
-    <% end %>
+    <%= render "search", purpose: "Search", url: "/", verb: :get %>
   </div>
 </div>
 

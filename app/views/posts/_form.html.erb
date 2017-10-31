@@ -11,7 +11,7 @@
 <div class="container jumbo-form">
   <div class="jumbotron">
     <div class="form">
-      <h2>Create Post</h2>
+      <h2>Create Article</h2>
       <br />
         <%= form_for @post, url: "/post", method: :post, html: { multipart: true } do |f| %>
 
@@ -19,7 +19,7 @@
           <%= fields_for :tags do |f| %>
              <%= f.text_field :title, class: 'form-control input_field' %>
           <% end %>
-          
+
           <br />
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.label :title %>:
