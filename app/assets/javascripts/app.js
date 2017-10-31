@@ -81,7 +81,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $('.add-chat').fadeToggle();
         $('.chat-form-minus').hide();
         $('.chat-form-plus').fadeIn();
-      }
+      },
+      addPeopleChatFormShow: function() {
+        $('.add-form').fadeToggle();
+        $('.add-people-minus').fadeIn();
+        $('.add-people-plus').hide();
+      },
+      removePeopleChatFormHide: function() {
+        $('.add-form').fadeToggle();
+        $('.add-people-minus').hide();
+        $('.add-people-plus').fadeIn();
+      },
     },
     computed: {
 

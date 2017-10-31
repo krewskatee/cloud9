@@ -31,7 +31,8 @@
       </div>
       <ul>
         <% @chats.each do |chat| %>
-          <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></li>
+          <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%> <%= link_to "Delete", "/chats/#{params[:id]}", method: :delete  %></li>
+
         <% end %>
       </ul>
 
@@ -45,10 +46,18 @@
           </li>
         <% end %>
       </ul>
+      Add people to chat
+      <i class="fa fa-plus add-people-plus" v-on:click="addPeopleChatFormShow()" aria-hidden="true"></i>
+      <i class="fa fa-minus add-people-minus" v-on:click="removePeopleChatFormHide" aria-hidden="true"></i>
+      <div class="add-form">
+        <%= render "add_form", purpose: "Add", url: "/user_chats", verb: :post %>
+      </div>
+      <h4>Remove people from chat</h4>
+      <%= render "remove_form", purpose: "Delete", url: "/user_chats", verb: :delete %>
     </div>
 </div>
 
-<%= link_to "Delete Chat Room", "/chats/#{params[:id]}", method: :delete, class: 'btn btn-danger' %>
+<%= link_to "Delete Chat Room", "/chats/#{params[:id]}", method: :delete  %>
 
 <div class="container chat-container">
   <div id="message-wr">
@@ -58,25 +67,7 @@
           </div>
       <% end %>
   </div>
-
-  <center>
-    <h4>Add people to chat</h4>
-    <%= form_for @user_chat, url: "/user_chats", method: :post do |f| %>
-      <%= f.hidden_field :chat_id, value: @chat.id %>
-      <%= f.text_area :user_id %>
-      <%= f.submit "send", class: "btn btn-large btn-primary"%>
-    <% end %>
-  </center>
-
-  <center>
-    <h4>Remove people from chat</h4>
-    <%= form_for @user_chat, url: "/user_chats", method: :delete do |f| %>
-      <%= f.hidden_field :chat_id, value: @chat.id %>
-      <%= f.text_area :user_id %>
-      <%= f.submit "send", class: "btn btn-large btn-primary"%>
-    <% end %>
-  </center>
-
+</div>
 
   <div class="message-input">
     <%= form_for(@chat_message, remote: true) do |f| %>
@@ -88,4 +79,3 @@
       <%= f.submit "send", class: "btn btn-large btn-primary"%>
     <% end %>
   </div>
-</div>

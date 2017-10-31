@@ -13,7 +13,7 @@ class RelationshipsController < ApplicationController
   def create
     unless friend
       flash[:danger] = "User does not exist."
-      redirect_to '/friends/new'
+      redirect_to '/chats'
     else
       @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id], status: relationship_params[:status])
       if friends_pending? || befrienders_pending?

@@ -408,3 +408,15 @@ textarea#message-edit-area {
   margin-bottom: 5px;
   border-width: 1px;
 }
+
+//------------------CHAT SHOW STYLING----------------//
+
+.add-form{
+  display: none;
+}
+
+.chat-container {
+  border-color: $font_color;
+  text-align: center;
+  width: 30%;
+}
