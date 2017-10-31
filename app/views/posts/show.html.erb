@@ -38,17 +38,19 @@
       <% end %>
       <div class="username">
         <%= @post.user.username %>
+        <div class="post-options">
+          <% if current_user && current_user == @post.user || current_user && current_user.admin %>
+            <%= link_to "Edit Post", "/post/#{@post.id}/edit", method: :get %>
+            <%= link_to "Delete Post", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
+          <% end %>
+        </div>
       </div>
       <br />
       <%= @post.content %>
 
-        <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-          <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get %>
-          <%= link_to "Delete", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
-        <% end %>
       </div>
-  </div>
 
+  </div>
 
     <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
