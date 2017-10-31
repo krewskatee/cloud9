@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get '/post/:id/edit' => 'posts#edit'
   patch '/post/:id' => 'posts#update'
 
-  get '/post' => 'posts#new'
+  get '/posts/new' => 'posts#new'
   post '/post' => 'posts#create'
   delete '/post/:id' => 'posts#destroy'
 
