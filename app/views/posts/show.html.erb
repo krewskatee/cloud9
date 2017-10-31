@@ -33,9 +33,6 @@
 
   <div class="container post-info-wrapper">
     <div class="post-container">
-      <% if @post.post_image.url != "/images/original/missing.png" %>
-        <%= image_tag @post.post_image.url %>
-      <% end %>
       <div class="username">
         <%= @post.user.username %>
         <div class="post-options">
@@ -47,7 +44,11 @@
       </div>
       <br />
       <%= @post.content %>
-
+      <br />
+      <% if @post.post_image.url != "/images/original/missing.png" %>
+        <hr>
+        <%= image_tag @post.post_image.url(:large) %>
+      <% end %>
       </div>
 
   </div>
