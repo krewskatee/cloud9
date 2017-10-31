@@ -68,7 +68,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update_attributes(allowed_params_post)
+    @post.assign_attributes(allowed_params_post)
     if @post.save
       array = allowed_params_tags[:title].split(" ")
       if array == []

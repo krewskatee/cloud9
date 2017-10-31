@@ -1,19 +1,22 @@
 <%= form_for @post, url: "/post/#{ @post.id }", method: :patch, html: { multipart: true } do |f| %>
-
+  <%= f.label :tags %>:
 
   <%= fields_for :tags do |f| %>
-     <%= f.text_field :title, value: @post.tags %>
+    <% @post.tags.each do |tag| %>
+     <%= f.text_field :title, value: tag.title, class: 'form-control input_field' %>
+    <% end %>
   <% end %>
-
+  
+  <br />
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.label :title %>:
-  <%= f.text_field :title, value: @post.title %><br />
+  <%= f.text_field :title, value: @post.title, class: 'form-control input_field' %><br />
 
-  <%= f.label :content, value: @post.content %>:
-  <%= f.text_field :content %><br />
+  <%= f.label :content %>:
+  <%= f.text_field :content, class: 'form-control input_field' %><br />
 
-  <%= f.file_field :post_image %>
+  <%= f.file_field :post_image %><br /><br />
 
 
-  <%= f.submit %>
+  <%= f.submit class: 'btn btn-sm btn-info' %>
 <% end %>

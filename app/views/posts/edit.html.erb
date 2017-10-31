@@ -1,2 +1,12 @@
-<h2>Create Post</h2>
-<%= render "edit_form", purpose: "Update", url: "/post/#{@post.id}", verb: :patch %>
+
+
+
+<div class="container jumbo-form">
+  <div class="jumbotron">
+    <div class="form">
+      <h2>Edit Post</h2>
+      <br /><br />
+      <%= render "edit_form", purpose: "Update", url: "/post/#{@post.id}", verb: :patch %>
+    </div>
+  </div>
+</div>
