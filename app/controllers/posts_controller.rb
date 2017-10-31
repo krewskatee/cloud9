@@ -71,9 +71,9 @@ class PostsController < ApplicationController
     @post.update_attributes(allowed_params_post)
     if @post.save
       array = allowed_params_tags[:title].split(" ")
-      if array == []
+      if array.empty?
         ForumTag.where(post_id: @post.id).destroy_all
-        array.each do |tag|
+      else  array.each do |tag|
           ForumTag.where(post_id: @post.id).destroy_all
           find = Tag.find_by(title: tag)
           if find
@@ -82,6 +82,7 @@ class PostsController < ApplicationController
                                         tag_id: find.id
                                         )
           else
+            puts = "=================================================================="
             obj_tag = Tag.create(
                                 title: tag
                                 )
