@@ -9,6 +9,8 @@ $link_color: black;
 $nav_bar_link_hover_color: #000;
 $link_hover_color: #7E8C8D;
 $header_background_color: #fff;
+$delete_link_color: #ff1919;
+$delete_link_hover_color: #B21111;
 //------------------GLOBAL STYLING----------------//
 
 .form-header {
@@ -290,6 +292,13 @@ nav a:hover::before {
     hr {
       width: 100%;
     }
+    a.post-link-delete {
+      color: $delete_link_color;
+    }
+
+    a.post-link-delete:hover {
+      color: $delete_link_hover_color;
+    }
     a {
       color: $font_color;
       text-decoration: none;
@@ -310,6 +319,14 @@ nav a:hover::before {
   .comment-container {
     text-align: left;
     padding: 0px;
+
+    a.post-link-delete {
+      color: $delete_link_color;
+    }
+
+    a.post-link-delete:hover {
+      color: $delete_link_hover_color;
+    }
 
     a {
       color: $font_color;
@@ -343,6 +360,7 @@ nav a:hover::before {
     border-radius: 5px;
     margin-bottom: 5px;
   }
+
 
 
   a {
@@ -419,4 +437,19 @@ textarea#message-edit-area {
   border-color: $font_color;
   text-align: center;
   width: 30%;
+}
+
+.channel-link {
+  color: $font_color;
+}
+.channel-link:hover {
+  color: $nav_bar_link_hover_color;
+}
+
+.channel-link-delete {
+  color: $delete_link_color;
+  font-size: .8em;
+}
+.channel-link-delete:hover {
+  color: $delete_link_hover_color;
 }

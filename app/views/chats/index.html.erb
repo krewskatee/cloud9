@@ -28,7 +28,7 @@
       </div>
       <ul>
         <% @chats.each do |chat| %>
-          <li><%= link_to chat.name, "/chats/#{chat.id}", method: :get%></li>
+          <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get%> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
         <% end %>
       </ul>
 
@@ -37,8 +37,8 @@
         <% @friend_requests.each do |friend_request| %>
           <li>
             <%= friend_request.befriender.username %> |
-            <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch %>
-            <%= link_to "Decline", "/friends/#{friend_request.id}", method: :delete %>
+            <%= link_to "Accept", "/friends/decision/#{friend_request.id}", class:'channel-link', method: :patch %>
+            <%= link_to "Decline", "/friends/#{friend_request.id}", class: 'channel-link-delete', method: :delete %>
           </li>
         <% end %>
       </ul>

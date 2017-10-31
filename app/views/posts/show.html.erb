@@ -43,8 +43,8 @@
       <%= @post.content %>
 
         <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-          <%= link_to "Delete", "/post/#{@post.id}", method: :delete %>
           <%= link_to "Edit", "/post/#{@post.id}/edit", method: :get %>
+          <%= link_to "Delete", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
         <% end %>
       </div>
   </div>
@@ -64,8 +64,9 @@
 
           <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">
             <a v-on:click="editToggle(comment)" class="edit-button">Edit</a>
-            <a v-on:click="deleteComment(comment)" class="edit-button">Delete</a>
+            <a v-on:click="deleteComment(comment)" class="edit-button post-link-delete">Delete</a>
           </div>
+
           <transition name="fade">
             <div class="edit" v-if="comment.commentVisible">
               <textarea class="message-edit-area" id="text-area">{{ comment.content }}</textarea>
