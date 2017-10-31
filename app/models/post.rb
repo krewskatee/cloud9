@@ -25,5 +25,13 @@ class Post < ApplicationRecord
     visits.count
   end
 
+  def tag_collection
+    tag_array = []
+    tags.each do |tag|
+      tag_array << tag.title
+    end
+    tag_collection = tag_array.join(" ")
+  end
+
 
 end

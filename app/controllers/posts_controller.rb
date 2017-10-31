@@ -106,13 +106,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-
-    @tag_array = []
-    @post.tags.each do |tag|
-      @tag_array << tag.title
-    end
-
-    @tag_collection = @tag_array.join(" ")
+    @tag_collection = @post.tag_collection
   end
 
   def destroy
