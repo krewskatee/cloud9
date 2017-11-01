@@ -56,25 +56,22 @@
     </div>
 </div>
 
-<%= link_to "Delete Chat Room", "/chats/#{params[:id]}", method: :delete  %>
-
 <div class="container chat-container">
-  <div id="message-wr">
-      <% @chat_messages.each do |message| %>
-          <div id="message-content">
-            <%= message.user.username %>: <%= message.content %>
-          </div>
-      <% end %>
+  <div class="scroll-container">
+    <div id="message-wr">
+        <% @chat_messages.each do |message| %>
+            <div id="message-content">
+              <%= message.user.username %>: <%= message.content %>
+            </div>
+        <% end %>
+    </div>
   </div>
-</div>
-
-  <div class="message-input">
+  <div class="message-input-container">
     <%= form_for(@chat_message, remote: true) do |f| %>
-
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :chat_id, value: @chat.id %>
-      <%= f.text_area :content %>
-
-      <%= f.submit "send", class: "btn btn-large btn-primary"%>
+      <%= f.text_area :content, class: "message-input" %>
+      <%= f.submit "send", class: "btn btn-large btn-info"%>
     <% end %>
   </div>
+</div>

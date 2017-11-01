@@ -393,12 +393,14 @@ nav a:hover::before {
   text-align: left;
   float: left;
   background-color: $background_color;
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
   color: $font_color;
   border-right-width: thin;
   width: 15%;
+  position: relative;
+  display: inline-block;
   li {
     list-style-type: none;
     padding: 0;
@@ -441,14 +443,53 @@ textarea#message-edit-area {
 
 //------------------CHAT SHOW STYLING----------------//
 
+
+
 .add-form{
   display: none;
 }
 
 .chat-container {
-  border-color: $font_color;
-  text-align: center;
-  width: 30%;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  display: inline-block;
+  margin-left: 10%;
+  border: 1px solid $font_color;
+  padding: 0;
+
+    .scroll-container {
+      height: 700px;
+      display: block;
+      overflow-y:auto;
+      width: 100%;
+      border-right: 5px;
+        #message-wr {
+          padding-left: 5px;
+        }
+    }
+
+    .message-input {
+      width: 90%;
+      height: 75px;
+      resize: none;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+    .message-input-container {
+      width: 100%;
+      height: 75px;
+      resize: none;
+      border-radius: 5px;
+      margin-bottom: 5px;
+        .btn {
+          margin-bottom: 75px;
+          height: 75px;
+          width: 9%;
+          display: inline;
+        }
+    }
 }
 
 .channel-link {
@@ -457,7 +498,6 @@ textarea#message-edit-area {
 .channel-link:hover {
   color: $nav_bar_link_hover_color;
 }
-
 .channel-link-delete {
   color: $delete_link_color;
   font-size: .8em;
