@@ -1,3 +1,7 @@
+<head>
+  <%= stylesheet_link_tag "chats" %>
+</head>
+
 <div class="alert-wrapper">
 </div>
 
@@ -57,7 +61,7 @@
 </div>
 
 <div class="container chat-container">
-  <div class="scroll-container">
+  <div id="scroll-container">
     <div id="message-wr">
         <% @chat_messages.each do |message| %>
             <div id="message-content">

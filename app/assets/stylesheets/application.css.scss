@@ -13,6 +13,7 @@ $delete_link_color: #ff1919;
 $delete_link_hover_color: #B21111;
 //------------------GLOBAL STYLING----------------//
 
+
 .form-header {
   text-align: center;
 }
@@ -458,7 +459,7 @@ textarea#message-edit-area {
   border: 1px solid $font_color;
   padding: 0;
 
-    .scroll-container {
+    #scroll-container {
       height: 700px;
       display: block;
       overflow-y:auto;
