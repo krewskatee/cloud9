@@ -14,12 +14,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
       $(".message-input").keydown(function (e) {
         if (e.keyCode == 13) {
-          $( ".chat-submit" ).trigger( "click" );
           $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
+          $( ".chat-submit" ).trigger( "click" );
           e.target.value = "";
           e.preventDefault();
         }
       });
+      $('.message-input').focus();
     },
 
     methods: {
