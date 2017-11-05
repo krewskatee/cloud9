@@ -11,9 +11,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
       $.get(`/api/v1/post/${gon.post_id}.json`, function(data) {
         this.post_comments = data.comments;
       }.bind(this));
+      $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
+      $(".message-input").keydown(function (e) {
+        if (e.keyCode == 13) {
+          $( ".chat-submit" ).trigger( "click" );
+          $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
+          e.target.value = "";
+          e.preventDefault();
+        }
+      });
     },
 
     methods: {
+      scroll_top: function(){
+       $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
+      },
       updateComment: function(comment, comment_content) {
         $.ajax({
           url: `/api/v1/comment/${comment.id}.json`,
@@ -95,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     computed: {
 
-    }
+    },
+
   });
 });

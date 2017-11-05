@@ -10,6 +10,3 @@ App.room = App.cable.subscriptions.create {channel: "RoomChannel", room:  gon.ch
       $('.alert-wrapper').append '<div class="alert alert-success">' + '<p class="alert-message">' + "You have received a new friends request!" + '</div>' +'</div>'
     unless data.content.blank?
       $('#message-wr').append '<div class="message-content">'+ data.username+ ': ' + data.content + '</div>'
-
-scroll_bottom = () ->
-  $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight)
