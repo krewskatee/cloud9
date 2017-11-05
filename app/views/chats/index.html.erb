@@ -13,7 +13,11 @@
     </div>
       <ul>
         <% @friends.each do |friend| %>
-          <li><%= friend.friend.username %></li>
+          <% if friend.befriender.id == current_user.id %>
+            <li><%= friend.friend.username %></li>
+          <% elsif friend.friend.id == current_user.id%>
+            <li><%= friend.befriender.username %></li>
+          <% end %>
         <% end %>
       </ul>
     <div class="listings_direct-messages">

@@ -48,10 +48,6 @@ class RelationshipsController < ApplicationController
   def friend_decision
     @relationship = Relationship.find(params[:id])
     @relationship.update_attributes(status: "accepted")
-    @new_relationship = UserChat.create(
-                                              friend_id: @relationship.befriender_id,
-                                              befriender_id: @relationship.friend_id
-                                            )
     redirect_to "/friends"
   end
 
