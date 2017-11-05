@@ -33,7 +33,7 @@ class RelationshipsController < ApplicationController
                                       friend_request_content: true
 
           head :ok
-          flash[:success] = "Sent friends request!"
+
         end
       end
     end
@@ -42,15 +42,15 @@ class RelationshipsController < ApplicationController
   def destroy
     @friend_request = Relationship.find(params[:id])
     @friend_request.destroy
-    redirect_to "/friends"
+    redirect_to "/chats"
   end
 
   def friend_decision
     @relationship = Relationship.find(params[:id])
     @relationship.update_attributes(status: "accepted")
     @new_relationship = UserChat.create(
-                                              friend_id: ,
-                                              befriender_id:
+                                              friend_id: @relationship.befriender_id,
+                                              befriender_id: @relationship.friend_id
                                             )
     redirect_to "/friends"
   end
