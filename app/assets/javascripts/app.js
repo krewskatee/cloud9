@@ -14,16 +14,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
       $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
       $(".message-input").keydown(function (e) {
         if (e.keyCode == 13) {
+          $("#scroll-container").stop().animate({ scrollTop: $("#scroll-container")[0].scrollHeight}, 1000);
           $( ".chat-submit" ).trigger( "click" );
-          $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
           e.target.value = "";
           e.preventDefault();
         }
       });
+      $(".chat-submit").click(function (e){
+        $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
+      });
+      $('.message-input').focus();
     },
 
     methods: {
-      scroll_top: function(){
+
+      scroll_top: function() {
        $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
       },
       updateComment: function(comment, comment_content) {

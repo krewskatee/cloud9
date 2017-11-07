@@ -2,7 +2,7 @@
   <%= stylesheet_link_tag "chats" %>
 </head>
 
-<div class="alert-wrapper">
+<div class="alert-wrapper alert">
 </div>
 
 <div class="main">
@@ -17,7 +17,11 @@
 
       <ul>
         <% @friends.each do |friend| %>
-          <li><%= friend.friend.username %></li>
+          <% if friend.befriender.id == current_user.id %>
+            <li><%= friend.friend.username %></li>
+          <% elsif friend.friend.id == current_user.id%>
+            <li><%= friend.befriender.username %></li>
+          <% end %>
         <% end %>
       </ul>
     <div class="listings_direct-messages">
@@ -71,11 +75,11 @@
     </div>
   </div>
   <div class="message-input-container">
-    <%= form_for(@chat_message, remote: true)do |f| %>
+    <%= form_for(@chat_message, remote: true) do |f| %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :chat_id, value: @chat.id %>
       <%= f.text_area :content, class: "message-input" %>
-      <%= f.submit "send", class: "btn btn-large btn-info chat-submit"%>
+      <%= f.submit "send", class: "btn btn-large btn-info chat-submit", onclick: "onSubmitClick()" %>
     <% end %>
   </div>
 </div>

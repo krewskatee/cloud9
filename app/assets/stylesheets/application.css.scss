@@ -294,6 +294,7 @@ nav a:hover::before {
   .post-info {
     font-size: 0.25em;
     color: $font_color;
+    font-weight: normal;
   }
 }
 
@@ -444,21 +445,21 @@ textarea#message-edit-area {
 
 //------------------CHAT SHOW STYLING----------------//
 
-
-
 .add-form{
   display: none;
 }
 
 .chat-container {
   width: 100%;
-  position: relative;
+  max-height: 100%;
+  position: absolute;
   height: 700px;
   display: inline-block;
-  margin-left: 10%;
+  margin-left: 25%;
   border-radius: 5px;
   border: 2px solid $font_color;
   padding: 0;
+
 
     #scroll-container {
       height: 700px;
@@ -468,6 +469,10 @@ textarea#message-edit-area {
       border-right: 5px;
         #message-wr {
           padding-left: 5px;
+          #message-content {
+            padding-top: 10px;
+            margin-bottom: 10px;
+          }
         }
     }
 
