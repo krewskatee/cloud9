@@ -10,4 +10,4 @@ App.room = App.cable.subscriptions.create {channel: "RoomChannel", room:  gon.ch
       $('.alert-wrapper').append '<div class="alert alert-success">' + '<p class="alert-message">' + "You have received a new friends request!" + '</div>' +'</div>'
       $('.alert').fadeIn(500).delay(1000).fadeOut(1000);
     unless data.content.blank?
-      $('#message-wr').append '<div class="message-content">'+ data.username+ ': ' + data.content + '</div>'
+      $('#message-wr').append '<div id="message-content">'+ data.username+ ': ' + data.content + '</div>'

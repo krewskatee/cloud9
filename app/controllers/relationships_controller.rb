@@ -48,7 +48,7 @@ class RelationshipsController < ApplicationController
   def friend_decision
     @relationship = Relationship.find(params[:id])
     @relationship.update_attributes(status: "accepted")
-    redirect_to "/friends"
+    redirect_to "/chats"
   end
 
   private

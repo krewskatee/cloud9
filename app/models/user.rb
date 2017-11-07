@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
 
   def accepted_friends
-    friends = (friends.where("status = 'accepted'") + befrienders.where("status = 'accepted'")).flatten
+    (friends.where("status = 'accepted'") + befrienders.where("status = 'accepted'")).flatten
   end
 
   def friend_requests
