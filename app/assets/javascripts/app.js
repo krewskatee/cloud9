@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
 
     methods: {
-      scroll_top: function(){
+
+      scroll_top: function() {
        $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
       },
       updateComment: function(comment, comment_content) {

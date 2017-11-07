@@ -21,3 +21,11 @@
 $(document).ready(function(){
   $('.alert').fadeIn(500).delay(1000).fadeOut(1000);
 });
+
+onSubmitClick = function() {
+  console.log("hi");
+  $("#scroll-container").stop().animate({ scrollTop: $("#scroll-container")[0].scrollHeight}, 1000);
+  setTimeout(function(){
+    $('.message-input').val('');
+  });
+}
