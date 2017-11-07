@@ -17,6 +17,10 @@ class User < ApplicationRecord
   validates :username, length: { in: 3..10 }
   validates :username, uniqueness: true
 
+  has_attached_file :avatar, styles: { large: "600x600>", tiny: "25x25>", thumb: "75x75>" }, default_url: "missing.jpg"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  #validates_with AttachmentPresenceValidator, attributes: :post_image
+
 
   def accepted_friends
     (friends.where("status = 'accepted'") + befrienders.where("status = 'accepted'")).flatten

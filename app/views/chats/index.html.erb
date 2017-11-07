@@ -21,7 +21,7 @@
         <% end %>
       </ul>
     <div class="listings_direct-messages">
-
+      <%= image_tag current_user.avatar.url(:thumb) %>
       Channels
 
       <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>

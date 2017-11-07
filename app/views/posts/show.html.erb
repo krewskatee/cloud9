@@ -34,6 +34,7 @@
   <div class="container post-info-wrapper">
     <div class="post-container">
       <div class="username">
+        <%= image_tag @post.user.avatar.url(:thumb) %>
         <%= @post.user.username %>
         <div class="post-options">
           <% if current_user && current_user == @post.user || current_user && current_user.admin %>
