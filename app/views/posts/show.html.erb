@@ -61,6 +61,7 @@
       <div class="comment-container">
         <div class="user">
           {{ comment.username }}
+          <img src="{{ comment.thumb_photo }}"></img>
         </div>
 
           <div class="comment-content" v-if="comment.commentVisible === false">
