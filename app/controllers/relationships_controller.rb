@@ -13,17 +13,17 @@ class RelationshipsController < ApplicationController
   def create
     unless friend
       flash[:danger] = "User does not exist."
-      redirect_to '/chats'
+      redirect_back(fallback_location: '/chats')
     else
       @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id], status: relationship_params[:status])
       if friends_pending? || befrienders_pending?
         flash[:info] = "Friendship Pending"
-        redirect_to '/chats'
+        redirect_back(fallback_location: '/chats')
       elsif friends_accepted? || befrienders_accepted?
         flash[:info] = "You are already friends with this person"
-        redirect_to '/chats'
+        redirect_back(fallback_location: '/chats')
       elsif self_friend?
-        redirect_to '/chats'
+        redirect_back(fallback_location: '/chats')
         flash[:info] = "You cannot be friends with yourself."
       else
         if @relationship.save
@@ -41,7 +41,7 @@ class RelationshipsController < ApplicationController
   def destroy
     @friend_request = Relationship.find(params[:id])
     @friend_request.destroy
-    redirect_to "/chats"
+    redirect_back(fallback_location: '/chats')
   end
 
   def delete_friend
@@ -52,13 +52,13 @@ class RelationshipsController < ApplicationController
       @friend = Relationship.find_by(befriender: params[:id])
       @friend.destroy
     end
-    redirect_to "/chats"
+    redirect_back(fallback_location: '/chats')
   end
 
   def friend_decision
     @relationship = Relationship.find(params[:id])
     @relationship.update_attributes(status: "accepted")
-    redirect_to "/chats"
+    redirect_back(fallback_location: '/chats')
   end
 
   private

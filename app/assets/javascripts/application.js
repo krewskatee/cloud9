@@ -28,9 +28,3 @@ onSubmitClick = function() {
     $('.message-input').val('');
   });
 }
-
-onChatSubmitClick = function() {
-  setTimeout(function(){
-    $('.add-chat').val('');
-  });
-}

@@ -1,6 +1,6 @@
 <%= form_for @relationship, url: '/friends', method: :post do |f| %>
   <%= f.hidden_field :befriender_id, value: current_user.id %>
   <%= f.hidden_field :status, value: "pending" %>
-  <%= f.text_field :friend_id %>
+  <%= f.text_field :friend_id, value: '' %>
   <%= f.submit "Add", class: 'btn btn-sm btn-info'%>
 <% end %>

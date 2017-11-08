@@ -1,0 +1,4 @@
+<%= form_for @chat, url: "/chats", method: :post do |f| %>
+  <%= f.text_field :name, value: '' %>
+  <%= f.submit "Create Chat", class: "btn btn-sm btn-info"%>
+<% end %>
