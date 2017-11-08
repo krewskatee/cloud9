@@ -1,5 +1,0 @@
-<%= form_for @user_chat, url: "/user_chats", method: :delete do |f| %>
-  <%= f.hidden_field :chat_id, value: @chat.id %>
-  <%= f.text_field :user_id %>
-  <%= f.submit "send", class: "btn btn-sm btn-primary"%>
-<% end %>

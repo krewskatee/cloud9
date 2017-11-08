@@ -2,25 +2,26 @@ class UserChatsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-      user = User.find_by(username: user_chats_params[:user_id])
-      @user_chat = UserChat.new(user_id: user.id, chat_id: user_chats_params[:chat_id])
-      if @user_chat.save
-        redirect_to "/chats/#{user_chats_params[:chat_id]}"
+      if user = User.find_by(username: user_chats_params[:user_id])
+        @user_chat = UserChat.new(user_id: user.id, chat_id: user_chats_params[:chat_id])
+        if @user_chat.save
+          redirect_to "/chats/#{user_chats_params[:chat_id]}"
+        else
+          flash[:warning] = "#{user.username} is already in this chatroom."
+          redirect_to "/chats/#{user_chats_params[:chat_id]}"
+        end
       else
-        flash[:warning] = "#{user.username} is already in this chatroom."
+        flash[:warning] = "User does not exist."
         redirect_to "/chats/#{user_chats_params[:chat_id]}"
       end
   end
 
   def destroy
-    user = User.find_by(username: user_chats_params[:user_id])
+    user = User.find(params[:id])
     user_chat = UserChat.where(user_id: user.id)
-    if user_chat_find = user_chat.find_by(chat_id: user_chats_params[:chat_id])
+    if user_chat_find = user_chat.find_by(chat_id: params[:chat_id])
       user_chat_find.destroy
-      redirect_to "/chats/#{user_chats_params[:chat_id]}"
-    else
-      flash[:warning] = "#{user.username} does not exist in this chat."
-      redirect_to "/chats/#{user_chats_params[:chat_id]}"
+      redirect_to "/chats/#{params[:chat_id]}"
     end
   end
 

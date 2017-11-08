@@ -51,8 +51,7 @@ Rails.application.routes.draw do
   delete '/friends/:id' => 'relationships#destroy'
 
   post '/user_chats' => 'user_chats#create'
-  delete '/user_chats' => 'user_chats#destroy'
-
+  delete '/user_chats/:id/:chat_id' => 'user_chats#destroy'
   patch '/comment/:id' => 'comments#update'
 
   mount ActionCable.server, at: '/cable'
