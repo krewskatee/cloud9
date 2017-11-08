@@ -300,6 +300,23 @@ nav a:hover::before {
 
 .post-info-wrapper {
   text-align: center;
+  .user-avatar {
+    float: left;
+    margin-right: 15px;
+    display: inline-block;
+  }
+
+  .comment-avatar {
+    float: left;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
+  .comment-content {
+
+  }
+
   .post-container {
     text-align: left;
     padding: 0;
@@ -397,6 +414,7 @@ nav a:hover::before {
   background-color: $background_color;
   height: 100vh;
   padding: 0;
+  padding-left: 20px;
   margin: 0;
   color: $font_color;
   border-right-width: thin;
@@ -450,10 +468,9 @@ textarea#message-edit-area {
 }
 
 .chat-container {
-  width: 100%;
-  max-height: 100%;
+  width: 1000px;
   position: absolute;
-  height: 700px;
+  height: auto;
   display: inline-block;
   margin-left: 25%;
   border-radius: 5px;
@@ -511,4 +528,13 @@ textarea#message-edit-area {
 }
 .channel-link-delete:hover {
   color: $delete_link_hover_color;
+}
+
+//------------------EDIT ACCOUNT PAGE----------------//
+
+.avatar-block {
+  text-align: center;
+  .upload-picture {
+    padding-left: 80px;
+  }
 }

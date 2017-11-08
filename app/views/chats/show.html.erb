@@ -15,15 +15,15 @@
       <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
     </div>
 
-      <ul>
-        <% @friends.each do |friend| %>
-          <% if friend.befriender.id == current_user.id %>
-            <li><%= friend.friend.username %></li>
-          <% elsif friend.friend.id == current_user.id%>
-            <li><%= friend.befriender.username %></li>
-          <% end %>
+    <ul>
+      <% @friends.each do |friend| %>
+        <% if friend.befriender.id == current_user.id %>
+          <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
+        <% elsif friend.friend.id == current_user.id%>
+          <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
         <% end %>
-      </ul>
+      <% end %>
+    </ul>
     <div class="listings_direct-messages">
 
       Channels
@@ -53,14 +53,25 @@
           </li>
         <% end %>
       </ul>
+
       Add people to chat
       <i class="fa fa-plus add-people-plus" v-on:click="addPeopleChatFormShow()" aria-hidden="true"></i>
       <i class="fa fa-minus add-people-minus" v-on:click="removePeopleChatFormHide" aria-hidden="true"></i>
       <div class="add-form">
         <%= render "add_form", purpose: "Add", url: "/user_chats", verb: :post %>
       </div>
-      <h4>Remove people from chat</h4>
-      <%= render "remove_form", purpose: "Delete", url: "/user_chats", verb: :delete %>
+      <br /><br />
+      Chat Users
+      <ul class="channel_list">
+        <% @current_chat.users.each do |user| %>
+          <% if user.id != current_user.id %>
+            <li>
+                <%= image_tag user.avatar.url(:tiny) %> <%= user.username %> <%= link_to "Remove", "/user_chats/#{user.id}/#{@chat.id}", class: 'channel-link-delete', method: :delete  %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
     </div>
 </div>
 

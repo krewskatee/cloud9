@@ -19,6 +19,7 @@ class ChatsController < ApplicationController
   end
 
   def show
+    @current_chat = Chat.find(params[:id])
     @relationship = Relationship.new
     @friends = current_user.accepted_friends
     @friend_requests = current_user.friend_requests

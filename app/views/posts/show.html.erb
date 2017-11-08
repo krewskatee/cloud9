@@ -32,6 +32,9 @@
   </div>
 
   <div class="container post-info-wrapper">
+    <div class="user-avatar">
+      <%= image_tag @post.user.avatar.url(:thumb) %>
+    </div>
     <div class="post-container">
       <div class="username">
         <%= @post.user.username %>
@@ -55,7 +58,9 @@
 
     <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
-
+      <div class="comment-avatar">
+        <img v-bind:src="comment.thumb_photo"></img>
+      </div>
       <div class="comment-container">
         <div class="user">
           {{ comment.username }}

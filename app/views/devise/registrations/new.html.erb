@@ -3,7 +3,7 @@
     <div class="form">
       <h2>Sign Up</h2>
       <br /><br />
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name, html: { multipart: true })) do |f| %>
         <%= devise_error_messages! %>
 
         <div class="field">
@@ -11,6 +11,10 @@
           <br /><br />
 
           <%= f.text_field :username, class: 'form-control input_field', placeholder: "Username" %>
+          <br /><br />
+
+          <%= f.label "Profile Picture" %>
+          <%= f.file_field :avatar, class: 'form-control input_field', placeholder: "Profile Picture" %>
           <br /><br />
 
           <%= f.password_field :password, autocomplete: "off", class: 'form-control input_field', placeholder: "Password (#{@minimum_password_length} characters minimum)" %>
