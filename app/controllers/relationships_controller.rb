@@ -33,7 +33,6 @@ class RelationshipsController < ApplicationController
                                       friend_request_content: true
 
           head :ok
-
         end
       end
     end
@@ -42,6 +41,17 @@ class RelationshipsController < ApplicationController
   def destroy
     @friend_request = Relationship.find(params[:id])
     @friend_request.destroy
+    redirect_to "/chats"
+  end
+
+  def delete_friend
+    if Relationship.find_by(friend_id: params[:id]) && Relationship.find_by(befriender_id: current_user.id)
+      @friend = Relationship.find_by(friend_id: params[:id])
+      @friend.destroy
+    elsif Relationship.find_by(befriender_id: params[:id]) && Relationship.find_by(friend_id: current_user.id)
+      @friend = Relationship.find_by(befriender: params[:id])
+      @friend.destroy
+    end
     redirect_to "/chats"
   end
 

@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get '/friends/new' => 'relationships#new'
   post '/friends' => 'relationships#create'
   patch '/friends/decision/:id' => 'relationships#friend_decision'
+  delete '/friends/delete/:id' => 'relationships#delete_friend'
   delete '/friends/:id' => 'relationships#destroy'
 
   post '/user_chats' => 'user_chats#create'

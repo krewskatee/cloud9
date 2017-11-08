@@ -32,9 +32,11 @@
   </div>
 
   <div class="container post-info-wrapper">
+    <div class="user-avatar">
+      <%= image_tag @post.user.avatar.url(:thumb) %>
+    </div>
     <div class="post-container">
       <div class="username">
-        <%= image_tag @post.user.avatar.url(:thumb) %>
         <%= @post.user.username %>
         <div class="post-options">
           <% if current_user && current_user == @post.user || current_user && current_user.admin %>
@@ -56,7 +58,6 @@
 
     <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
-
       <div class="comment-container">
         <div class="user">
           {{ comment.username }}

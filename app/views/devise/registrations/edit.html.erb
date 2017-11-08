@@ -5,6 +5,22 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= devise_error_messages! %>
 
+        <div class="avatar-block">
+          <div class="avatar-picture">
+            <%= image_tag current_user.avatar.url(:settings) %>
+          </div>
+          <br />
+          <div class="upload-picture">
+            <%= f.file_field :avatar, placeholder: "Profile Picture" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :username %><br />
+          <%= f.text_field :username, autofocus: true, class: 'form-control input_field' %>
+          <br />
+        </div>
+
         <div class="field">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, class: 'form-control input_field' %>

@@ -15,15 +15,15 @@
       <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
     </div>
 
-      <ul>
-        <% @friends.each do |friend| %>
-          <% if friend.befriender.id == current_user.id %>
-            <li><%= friend.friend.username %></li>
-          <% elsif friend.friend.id == current_user.id%>
-            <li><%= friend.befriender.username %></li>
-          <% end %>
+    <ul>
+      <% @friends.each do |friend| %>
+        <% if friend.befriender.id == current_user.id %>
+          <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
+        <% elsif friend.friend.id == current_user.id%>
+          <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
         <% end %>
-      </ul>
+      <% end %>
+    </ul>
     <div class="listings_direct-messages">
 
       Channels

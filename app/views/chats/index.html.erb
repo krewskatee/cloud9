@@ -14,14 +14,13 @@
       <ul>
         <% @friends.each do |friend| %>
           <% if friend.befriender.id == current_user.id %>
-            <li><%= friend.friend.username %></li>
+            <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.friend.username %></li>
           <% elsif friend.friend.id == current_user.id%>
-            <li><%= friend.befriender.username %></li>
+            <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.befriender.username %></li>
           <% end %>
         <% end %>
       </ul>
     <div class="listings_direct-messages">
-      <%= image_tag current_user.avatar.url(:thumb) %>
       Channels
 
       <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
