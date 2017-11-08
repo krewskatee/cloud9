@@ -58,10 +58,12 @@
 
     <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
+      <div class="comment-avatar">
+        <img v-bind:src="comment.thumb_photo"></img>
+      </div>
       <div class="comment-container">
         <div class="user">
           {{ comment.username }}
-          <img src="{{ comment.thumb_photo }}"></img>
         </div>
 
           <div class="comment-content" v-if="comment.commentVisible === false">

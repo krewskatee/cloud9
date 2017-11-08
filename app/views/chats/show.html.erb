@@ -18,9 +18,9 @@
     <ul>
       <% @friends.each do |friend| %>
         <% if friend.befriender.id == current_user.id %>
-          <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
+          <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
         <% elsif friend.friend.id == current_user.id%>
-          <li><%= image_tag current_user.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
+          <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
         <% end %>
       <% end %>
     </ul>
@@ -66,7 +66,7 @@
         <% @current_chat.users.each do |user| %>
           <% if user.id != current_user.id %>
             <li>
-                <%= user.username %> <%= link_to "Remove", "/user_chats/#{user.id}/#{@chat.id}", class: 'channel-link-delete', method: :delete  %>
+                <%= image_tag user.avatar.url(:tiny) %> <%= user.username %> <%= link_to "Remove", "/user_chats/#{user.id}/#{@chat.id}", class: 'channel-link-delete', method: :delete  %>
             </li>
           <% end %>
         <% end %>

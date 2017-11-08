@@ -305,6 +305,18 @@ nav a:hover::before {
     margin-right: 15px;
     display: inline-block;
   }
+
+  .comment-avatar {
+    float: left;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
+  .comment-content {
+
+  }
+
   .post-container {
     text-align: left;
     padding: 0;
