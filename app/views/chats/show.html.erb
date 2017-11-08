@@ -5,7 +5,13 @@
 <div class="alert-wrapper alert">
 </div>
 
+
+
 <div class="main">
+
+    <div class="chat-title">
+      <%= @current_chat.name %>
+    </div>
 
     Friends
     <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
