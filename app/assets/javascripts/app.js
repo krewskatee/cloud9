@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
 
     methods: {
-
       scroll_top: function() {
        $('#scroll-container').scrollTop($('#scroll-container')[0].scrollHeight);
       },
@@ -65,8 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             user_id: gon.current_user_id
           };
           $.post('/api/v1/comment.json', newComment, function(newComment) {
-           this.post_comments.push(newComment);
-           this.content = "";
+           location.reload();
           }.bind(this)).fail(function(response) {
             $('.error-wrapper').fadeOut(6000);
            this.errors = (response.responseJSON.errors);

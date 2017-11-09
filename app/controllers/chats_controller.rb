@@ -14,7 +14,7 @@ class ChatsController < ApplicationController
     @chat = Chat.new(chat_params)
     if @chat.save
       @user_chat = UserChat.create(user_id: current_user.id, chat_id: @chat.id)
-      redirect_to '/chats'
+      redirect_back(fallback_location: '/chats')
     end
   end
 
@@ -43,7 +43,7 @@ class ChatsController < ApplicationController
     chat_users = UserChat.where(chat_id: chat.id)
     chat.destroy
     chat_users.destroy_all
-    redirect_to "/chats"
+    redirect_back(fallback_location: '/chats')
   end
 
   private

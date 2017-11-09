@@ -23,7 +23,6 @@ $(document).ready(function(){
 });
 
 onSubmitClick = function() {
-  console.log("hi");
   $("#scroll-container").stop().animate({ scrollTop: $("#scroll-container")[0].scrollHeight}, 1000);
   setTimeout(function(){
     $('.message-input').val('');

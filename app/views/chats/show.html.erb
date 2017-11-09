@@ -5,7 +5,13 @@
 <div class="alert-wrapper alert">
 </div>
 
+
+
 <div class="main">
+
+    <div class="chat-title">
+      <%= @current_chat.name %>
+    </div>
 
     Friends
     <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
@@ -27,19 +33,14 @@
     <div class="listings_direct-messages">
 
       Channels
-
       <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
       <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
-
       <div class="add-chat">
-        <%= form_for @chat, url: "/chats", method: :post do |f| %>
-          <%= f.text_field :name %>
-          <%= f.submit "Create Chat", class: "btn btn-sm btn-info"%>
-        <% end %>
+        <%= render "add_chats", purpose: "Add", url: "/chats", verb: :post %>
       </div>
       <ul>
         <% @chats.each do |chat| %>
-          <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get%> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
+          <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get %> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
         <% end %>
       </ul>
 
