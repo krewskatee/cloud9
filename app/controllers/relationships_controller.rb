@@ -13,18 +13,18 @@ class RelationshipsController < ApplicationController
   def create
     unless friend
       flash[:danger] = "User does not exist."
-      redirect_back(fallback_location: '/chats')
+      render js: "location.reload()"
     else
       @relationship = Relationship.new(friend_id: friend.id, befriender_id: relationship_params[:befriender_id], status: relationship_params[:status])
       if friends_pending? || befrienders_pending?
         flash[:info] = "Friendship Pending"
-        redirect_back(fallback_location: '/chats')
+        render js: "location.reload()"
       elsif friends_accepted? || befrienders_accepted?
         flash[:info] = "You are already friends with this person"
-        redirect_back(fallback_location: '/chats')
+        render js: "location.reload()"
       elsif self_friend?
-        redirect_back(fallback_location: '/chats')
-        flash[:info] = "You cannot be friends with yourself."
+        flash[:info] = "You can't be friends with yourself!"
+        render js: "location.reload()"
       else
         if @relationship.save
           gon.send_id = @relationship.friend_id
