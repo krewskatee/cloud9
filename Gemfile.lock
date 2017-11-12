@@ -88,12 +88,8 @@ GEM
       request_store (>= 1.0)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-<<<<<<< HEAD
-    i18n (0.8.6)
-=======
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
->>>>>>> 205545f7387b075b89e5ba4a8ab04f084bd4597b
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -142,11 +138,7 @@ GEM
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
-<<<<<<< HEAD
-    popper_js (1.11.1)
-=======
     popper_js (1.12.5)
->>>>>>> 205545f7387b075b89e5ba4a8ab04f084bd4597b
     public_suffix (3.0.1)
     puma (3.10.0)
     rack (2.0.3)
