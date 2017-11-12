@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
+  require "opentok"
 
 
   def index
@@ -12,7 +13,10 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new(chat_params)
+    opentok_config
+    session = @opentok.create_session
+    session_id = session.session_id
+    @chat = Chat.new(name: chat_params[:name], session_id: session_id)
     if @chat.save
       @user_chat = UserChat.create(user_id: current_user.id, chat_id: @chat.id)
       redirect_back(fallback_location: '/chats')
@@ -21,6 +25,9 @@ class ChatsController < ApplicationController
 
   def show
     @current_chat = Chat.find(params[:id])
+    opentok_config
+    gon.session_id = @current_chat.session_id
+    gon.token = @opentok.generate_token @current_chat.session_id
     @relationship = Relationship.new
     @friends = current_user.accepted_friends
     @friend_requests = current_user.friend_requests
@@ -49,8 +56,14 @@ class ChatsController < ApplicationController
 
   private
 
+  def opentok_config
+    if @opentok.nil?
+      @opentok = OpenTok::OpenTok.new ENV['API_KEY'], ENV['API_SECRET']
+    end
+  end
+
   def chat_params
-    params.require(:chat).permit(:name)
+    params.require(:chat).permit(:name, :session_id)
   end
 
   def config_opentok
