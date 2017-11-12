@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
+  require "opentok"
 
   def index
     @relationship = Relationship.new
@@ -19,6 +20,11 @@ class ChatsController < ApplicationController
   end
 
   def show
+    opentok = OpenTok::OpenTok.new ENV['API_KEY'], ENV['API_SECRET']
+    session = opentok.create_session
+    gon.session_id = session.session_id
+    gon.token = opentok.generate_token gon.session_id
+
     @current_chat = Chat.find(params[:id])
     @relationship = Relationship.new
     @friends = current_user.accepted_friends
