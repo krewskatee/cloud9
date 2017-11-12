@@ -27,6 +27,8 @@ gem 'pg_search'
 gem 'local_time'
 gem 'vuejs-rails'
 gem 'font-awesome-sass'
+gem 'opentok'
+gem 'figaro'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'gon'
