@@ -152,7 +152,7 @@ function initializeSession() {
   session.connect(token, function(error) {
     // If the connection is successful, initialize a publisher and publish to the session
     if (error) {
-      handleError(error);
+      // handleError(error);
     } else {
       session.publish(publisher, handleError);
     }
