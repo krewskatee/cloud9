@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :befrienders, class_name: "Relationship", foreign_key: :befriender_id
 
   validates :username, presence: true
-  validates :username, length: { in: 3..10 }
+  validates :username, length: { in: 3..20 }
   validates :username, uniqueness: true
 
   has_attached_file :avatar, styles: { large: "600x600#", tiny: "25x25#", thumb: "75x75#", settings: "150x150#" }
