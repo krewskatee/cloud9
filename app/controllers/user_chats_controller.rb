@@ -1,5 +1,5 @@
 class UserChatsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!
 
   def create
       if user = User.find_by(username: user_chats_params[:user_id])

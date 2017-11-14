@@ -1,14 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
-
-  def index
-    @friends = current_user.accepted_friends
-    @friend_requests = current_user.friend_requests
-  end
-
-  def new
-      @relationship = Relationship.new
-  end
+  before_action :authenticate_user!
 
   def create
     unless friend
