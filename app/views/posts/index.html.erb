@@ -14,6 +14,7 @@
 </div>
 
 <% @posts.each do |post| %>
+<a href="/post/<% post.id %>">
 <div id="posts_wrapper" class="skinny-wrapper">
 
   <hr>
@@ -30,10 +31,7 @@
       <% end %>
     </p>
 
-
-
     <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get %></h1>
-      <!-- <h5 class="content"><%= post.content %></h5> -->
 
     <p class="views">
       Views:
@@ -42,6 +40,5 @@
       <%= post.comments.count %>
     </p>
   </div>
-
 </div>
 <% end %>
