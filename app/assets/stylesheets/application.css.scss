@@ -5,14 +5,24 @@
 //------------------GLOBAL VARIABLES----------------//
 $background_color: #FFFFFF;
 $font_color: #93A5A5;
-$link_color: black;
+$link_color: #000;
 $nav_bar_link_hover_color: #000;
 $link_hover_color: #7E8C8D;
 $header_background_color: $background_color;
 $delete_link_color: #ff1919;
 $delete_link_hover_color: #B21111;
 //------------------GLOBAL STYLING----------------//
+
+
 * { margin: 0; padding: 0px; }
+
+.back {
+  color: $font_color;
+}
+
+.back:hover {
+  color: $nav_bar_link_hover_color;
+}
 
 .views {
   padding-bottom: 20px;
@@ -363,6 +373,7 @@ postlogo {
     a.post-link-delete:hover {
       color: $delete_link_hover_color;
     }
+
     a {
       color: $font_color;
       text-decoration: none;
@@ -373,6 +384,7 @@ postlogo {
       color: $nav_bar_link_hover_color;
       text-decoration: none;
     }
+
 
     .username {
       font-size: 2em;
@@ -426,11 +438,14 @@ postlogo {
   }
 
 
-
   a {
     color: $font_color;
     text-decoration: none;
     font-size: 1em;
+  }
+
+  .back-gray:hover {
+    color: $link_hover_color;
   }
 
   a:hover {
@@ -506,6 +521,27 @@ textarea#message-edit-area {
 }
 
 //------------------CHAT SHOW STYLING----------------//
+
+#videos {
+  position: relative;
+  float: right;
+  height: 400px;
+  width: 20%;
+}
+
+#publisher {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#subscriber {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 .add-form{
   display: none;
@@ -586,25 +622,4 @@ textarea#message-edit-area {
   .upload-picture {
     padding-left: 80px;
   }
-}
-
-#videos {
-  position: relative;
-  float: right;
-  height: 400px;
-  width: 20%;
-}
-
-#publisher {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#subscriber {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }

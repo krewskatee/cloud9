@@ -35,6 +35,7 @@
           <br />
           <div class="actions">
             <%= f.submit "Create Post", class: "btn btn-info btn-md" %>
+            <%= link_to 'Back', "/post/#{@post.id}", class: 'back'%>
           </div>
         </div>
       <% end %>

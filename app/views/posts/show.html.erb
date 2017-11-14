@@ -93,7 +93,7 @@
     <% if current_user %>
       <textarea v-model="content" id="message_area"></textarea>
       <button v-on:click="addComment()" class="btn btn-sm btn-info">Comment</button>
-      <%= link_to "Back", "/", method: :get %>
+      <%= link_to "Back", "/", method: :get, class: 'back-gray' %>
     <% end %>
   </div>
 </div>
