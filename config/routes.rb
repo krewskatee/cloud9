@@ -13,32 +13,32 @@ Rails.application.routes.draw do
       get '/post/:id' => 'posts#show'
       get '/posts' => 'posts#index'
       get '/comment' => 'comments#index'
-      get '/comment/:id' => 'comments#show'
       post '/comment' => 'comments#create'
+      get '/comment/:id' => 'comments#show'
       patch '/comment/:id' => 'comments#update'
       delete '/comment/:id' => 'comments#destroy'
     end
   end
 
   post '/chat_messages' => 'chat_messages#create'
+
   get '/chats' => 'chats#index'
-  get '/chats/:id' => 'chats#show'
   post '/chats' => 'chats#create'
+  get '/chats/:id' => 'chats#show'
   delete '/chats/:id' => 'chats#destroy'
 
   get '/' => 'posts#index'
 
+  get '/posts/new' => 'posts#new'
+  post '/post' => 'posts#create'
   get '/post/:id' => 'posts#show'
   get '/post/:id/edit' => 'posts#edit'
   patch '/post/:id' => 'posts#update'
-  get '/posts/new' => 'posts#new'
-  post '/post' => 'posts#create'
   delete '/post/:id' => 'posts#destroy'
 
   post '/comment' => 'comments#create'
   patch '/comment/:id' => 'comments#update'
   delete '/comment/:id' => 'comments#destroy'
-
 
   post '/friends' => 'relationships#create'
   patch '/friends/decision/:id' => 'relationships#friend_decision'
@@ -46,8 +46,8 @@ Rails.application.routes.draw do
   delete '/friends/:id' => 'relationships#destroy'
 
   post '/user_chats' => 'user_chats#create'
-  delete '/user_chats/:id/:chat_id' => 'user_chats#destroy'
   patch '/comment/:id' => 'comments#update'
+  delete '/user_chats/:id/:chat_id' => 'user_chats#destroy'
 
   mount ActionCable.server, at: '/cable'
 
