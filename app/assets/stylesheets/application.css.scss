@@ -13,6 +13,11 @@ $delete_link_color: #ff1919;
 $delete_link_hover_color: #B21111;
 //------------------GLOBAL STYLING----------------//
 
+.OT_mirrored{
+  height: 700px;
+  width: 700px;
+}
+
 
 .views {
   padding-bottom: 20px;
@@ -513,7 +518,7 @@ textarea#message-edit-area {
   font-size: 3em;
 }
 .chat-container {
-  width: 1000px;
+  width: 50%;
   position: absolute;
   height: auto;
   display: inline-block;
@@ -585,4 +590,25 @@ textarea#message-edit-area {
   .upload-picture {
     padding-left: 80px;
   }
+}
+
+#videos {
+  position: relative;
+  float: right;
+  height: 400px;
+  width: 20%;
+}
+
+#publisher {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#subscriber {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }

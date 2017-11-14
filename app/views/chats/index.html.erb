@@ -1,58 +1,60 @@
 <head>
   <%= stylesheet_link_tag "chats" %>
 </head>
+<div id="app">
 
-<div class="main">
-  <br />
-  Friends
-  <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
-  <i class="fa fa-minus fa-friend-minus" v-on:click="addToggle()" aria-hidden="true"></i>
-  <div id="friends-form">
-    <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
-  </div>
-  <hr>
-    <ul>
-      <% @friends.each do |friend| %>
-        <% if friend.befriender.id == current_user.id %>
-          <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
-        <% elsif friend.friend.id == current_user.id%>
-          <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
-        <% end %>
-      <% end %>
-    </ul>
-  <div class="listings_direct-messages">
-    <hr>
-    Channels
-
-    <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
-    <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
-
-    <div class="add-chat">
-      <%= form_for @chat, url: "/chats", method: :post do |f| %>
-        <%= f.text_field :name %>
-        <%= f.submit "Create Chat", class: "btn btn-sm btn-info"%>
-      <% end %>
+  <div class="main">
+    <br />
+    Friends
+    <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
+    <i class="fa fa-minus fa-friend-minus" v-on:click="addToggle()" aria-hidden="true"></i>
+    <div id="friends-form">
+      <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
     </div>
-    <ul>
-      <% @chats.each do |chat| %>
-        <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get%> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
-      <% end %>
-    </ul>
     <hr>
-    Friend Requests
-    <ul class="channel_list">
-      <% @friend_requests.each do |friend_request| %>
-        <li>
-          <%= friend_request.befriender.username %> |
-          <%= link_to "Accept", "/friends/decision/#{friend_request.id}", class:'channel-link', method: :patch %>
-          <%= link_to "Decline", "/friends/#{friend_request.id}", class: 'channel-link-delete', method: :delete %>
-        </li>
-      <% end %>
-    </ul>
-    <hr>
-  </div>
-</div>
+      <ul>
+        <% @friends.each do |friend| %>
+          <% if friend.befriender.id == current_user.id %>
+            <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
+          <% elsif friend.friend.id == current_user.id%>
+            <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <div class="listings_direct-messages">
+      <hr>
+      Channels
 
-<div class="message">
-  Please create or select a chatroom!
+      <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
+      <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
+
+      <div class="add-chat">
+        <%= form_for @chat, url: "/chats", method: :post do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit "Create Chat", class: "btn btn-sm btn-info"%>
+        <% end %>
+      </div>
+      <ul>
+        <% @chats.each do |chat| %>
+          <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get%> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
+        <% end %>
+      </ul>
+      <hr>
+      Friend Requests
+      <ul class="channel_list">
+        <% @friend_requests.each do |friend_request| %>
+          <li>
+            <%= friend_request.befriender.username %> |
+            <%= link_to "Accept", "/friends/decision/#{friend_request.id}", class:'channel-link', method: :patch %>
+            <%= link_to "Decline", "/friends/#{friend_request.id}", class: 'channel-link-delete', method: :delete %>
+          </li>
+        <% end %>
+      </ul>
+      <hr>
+    </div>
+  </div>
+
+  <div class="message">
+    Please create or select a chatroom!
+  </div>
 </div>

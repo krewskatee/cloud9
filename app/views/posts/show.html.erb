@@ -1,96 +1,99 @@
-<div class="error-wrapper">
-  <div class="alert alert-danger" v-for="error in errors">
-    <p class="alert-message">
-      {{ error }}
-    </p>
-  </div>
-</div>
+<div id="app">
 
-<div class="post-header">
-  <postlogo><%= @post.title %></postlogo>
-  <br />
-  <div class="post-info">
-    Views: <%= @post.visit_count %>
+  <div class="error-wrapper">
+    <div class="alert alert-danger" v-for="error in errors">
+      <p class="alert-message">
+        {{ error }}
+      </p>
+    </div>
+  </div>
+
+  <div class="post-header">
+    <postlogo><%= @post.title %></postlogo>
     <br />
-    <% if @post.comments.last %>
-      <%= local_time(@post.comments.last.created_at, "%A, %d %b %Y") %>
-      <%= local_time(@post.comments.last.created_at, "%l:%M %p") %>
-    <% else %>
-      <%= local_time(@post.created_at, "%A, %d %b %Y") %>
-      <%= local_time(@post.created_at, "%l:%M %p") %>
-    <% end %>
-    <br />
-    <% if @post.tags.first %>
-      Tags:
-      <% @post.tags.each do |tag| %>
-        <%= tag.title %>
+    <div class="post-info">
+      Views: <%= @post.visit_count %>
+      <br />
+      <% if @post.comments.last %>
+        <%= local_time(@post.comments.last.created_at, "%A, %d %b %Y") %>
+        <%= local_time(@post.comments.last.created_at, "%l:%M %p") %>
+      <% else %>
+        <%= local_time(@post.created_at, "%A, %d %b %Y") %>
+        <%= local_time(@post.created_at, "%l:%M %p") %>
       <% end %>
+      <br />
+      <% if @post.tags.first %>
+        Tags:
+        <% @post.tags.each do |tag| %>
+          <%= tag.title %>
+        <% end %>
+      <% end %>
+    </div>
+    <hr>
+  </div>
+
+  <div class="container post-info-wrapper">
+    <div class="user-avatar">
+      <%= image_tag @post.user.avatar.url(:thumb) %>
+    </div>
+    <div class="post-container">
+      <div class="username">
+        <%= @post.user.username %>
+        <div class="post-options">
+          <% if current_user && current_user == @post.user || current_user && current_user.admin %>
+            <%= link_to "Edit Article", "/post/#{@post.id}/edit", method: :get %>
+            <%= link_to "Delete Article", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
+          <% end %>
+        </div>
+      </div>
+      <br />
+      <%= @post.content %>
+      <br />
+      <br />
+        <hr>
+        <div class="post-image">
+          <% if @post.post_image.url != "/images/original/missing.png" %>
+            <%= image_tag @post.post_image.url(:large) %>
+          <% end %>
+        </div>
+      </div>
+
+  </div>
+
+    <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
+      <hr>
+      <div class="comment-container">
+        <div class="user">
+          <img v-bind:src="comment.thumb_photo"></img>
+          {{ comment.username }}
+        </div>
+
+          <div class="comment-content" v-if="comment.commentVisible === false">
+            <hr>
+              {{ comment.content }}
+            <hr>
+          </div>
+
+          <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">
+            <a v-on:click="editToggle(comment)" class="edit-button">Edit</a>
+            <a v-on:click="deleteComment(comment)" class="edit-button post-link-delete">Delete</a>
+          </div>
+
+          <transition name="fade">
+            <div class="edit" v-if="comment.commentVisible">
+              <textarea class="message-edit-area" id="text-area">{{ comment.content }}</textarea>
+              <a v-on:click="editToggle(comment);updateComment(comment)" class="edit-button">Update</a>
+              <a v-on:click="editToggle(comment)" class="edit-button">Cancel</a>
+            </div>
+          </transition>
+      </div>
+    </div>
+
+  <div class="container comment-input-wrapper">
+    <% if current_user %>
+      <textarea v-model="content" id="message_area"></textarea>
+      <button v-on:click="addComment()" class="btn btn-sm btn-info">Comment</button>
+      <%= link_to "Back", "/", method: :get %>
     <% end %>
   </div>
-  <hr>
-</div>
-
-<div class="container post-info-wrapper">
-  <div class="user-avatar">
-    <%= image_tag @post.user.avatar.url(:thumb) %>
-  </div>
-  <div class="post-container">
-    <div class="username">
-      <%= @post.user.username %>
-      <div class="post-options">
-        <% if current_user && current_user == @post.user || current_user && current_user.admin %>
-          <%= link_to "Edit Article", "/post/#{@post.id}/edit", method: :get %>
-          <%= link_to "Delete Article", "/post/#{@post.id}",class:'post-link-delete', method: :delete %>
-        <% end %>
-      </div>
-    </div>
-    <br />
-    <%= @post.content %>
-    <br />
-    <br />
-      <hr>
-      <div class="post-image">
-        <% if @post.post_image.url != "/images/original/missing.png" %>
-          <%= image_tag @post.post_image.url(:large) %>
-        <% end %>
-      </div>
-    </div>
-
-</div>
-
-  <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
-    <hr>
-    <div class="comment-container">
-      <div class="user">
-        <img v-bind:src="comment.thumb_photo"></img>
-        {{ comment.username }}
-      </div>
-
-        <div class="comment-content" v-if="comment.commentVisible === false">
-          <hr>
-            {{ comment.content }}
-          <hr>
-        </div>
-
-        <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">
-          <a v-on:click="editToggle(comment)" class="edit-button">Edit</a>
-          <a v-on:click="deleteComment(comment)" class="edit-button post-link-delete">Delete</a>
-        </div>
-
-        <transition name="fade">
-          <div class="edit" v-if="comment.commentVisible">
-            <textarea class="message-edit-area" id="text-area">{{ comment.content }}</textarea>
-            <a v-on:click="editToggle(comment);updateComment(comment)" class="edit-button">Update</a>
-            <a v-on:click="editToggle(comment)" class="edit-button">Cancel</a>
-          </div>
-        </transition>
-    </div>
-  </div>
-
-<div class="container comment-input-wrapper">
-  <% if current_user %>
-    <textarea v-model="content" id="message_area"></textarea>
-    <button v-on:click="addComment()" class="btn btn-sm btn-info">Comment</button>
-    <%= link_to "Back", "/", method: :get %>
-  <% end %>
 </div>
