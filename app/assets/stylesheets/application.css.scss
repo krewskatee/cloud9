@@ -215,6 +215,8 @@ nav a:hover::before {
   width: 80%;
   max-width: 760px;
   margin: 0 auto;
+  border-width: 1px;
+  border-style: solid;
   hr {
     width: 80%;
     display: block;
@@ -465,6 +467,8 @@ postlogo {
 }
 
 .main {
+  border-width: 3px;
+  border-style: solid;
   background-color: $background_color;
   opacity: 0.9;
   border-radius: 5px;
