@@ -21,8 +21,6 @@ Rails.application.routes.draw do
   end
 
   post '/chat_messages' => 'chat_messages#create'
-
-
   get '/chats' => 'chats#index'
   get '/chats/:id' => 'chats#show'
   post '/chats' => 'chats#create'
@@ -33,18 +31,15 @@ Rails.application.routes.draw do
   get '/post/:id' => 'posts#show'
   get '/post/:id/edit' => 'posts#edit'
   patch '/post/:id' => 'posts#update'
-
   get '/posts/new' => 'posts#new'
   post '/post' => 'posts#create'
   delete '/post/:id' => 'posts#destroy'
 
   post '/comment' => 'comments#create'
-  get '/comment/:id/edit' => 'comments#edit'
   patch '/comment/:id' => 'comments#update'
   delete '/comment/:id' => 'comments#destroy'
 
-  get '/friends' => 'relationships#index'
-  get '/friends/new' => 'relationships#new'
+
   post '/friends' => 'relationships#create'
   patch '/friends/decision/:id' => 'relationships#friend_decision'
   delete '/friends/delete/:id' => 'relationships#delete_friend'
@@ -56,5 +51,5 @@ Rails.application.routes.draw do
 
   mount ActionCable.server, at: '/cable'
 
-
+  
 end
