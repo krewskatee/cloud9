@@ -13,6 +13,9 @@ $delete_link_color: #ff1919;
 $delete_link_hover_color: #B21111;
 //------------------GLOBAL STYLING----------------//
 
+.jumbotron {
+  opacity: 0.85;
+}
 
 .form-header {
   text-align: center;
@@ -48,7 +51,7 @@ body, html {
 
 body {
   margin: 0;
-  background: #fff;
+  background-image: url("background.jpg");
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
 }
@@ -109,8 +112,13 @@ textarea.message-edit-area {
   margin: 0 auto;
 }
 
+logo {
+  color: #fff;
+}
+
 header {
-  background-color: $header_background_color;
+  background-color: #fff;
+  opacity: 0.8;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -190,18 +198,23 @@ nav a:hover::before {
 //------------------POSTS INDEX STYLING----------------//
 
 .skinny-wrapper {
+  border-radius: 5px;
+  background-color: #fff;
+  opacity: 0.8;
   width: 80%;
   max-width: 760px;
   margin: 0 auto;
   hr {
     width: 80%;
-
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid $link_hover_color;
+    border-top: 1px solid #fff;
     margin: 1.5em auto;
   }
+}
+.skinny-wrapper:hover {
+  opacity: .95;
 }
 
 .header {
@@ -267,6 +280,10 @@ nav a:hover::before {
 
 //------------------POSTS SHOW STYLING----------------//
 
+postlogo {
+  color: #fff;
+}
+
 .post-options {
   font-size: .5em;
   display: inline;
@@ -300,23 +317,20 @@ nav a:hover::before {
 
 .post-info-wrapper {
   text-align: center;
+  background-color: #fff;
+  opacity: 0.8;
+  border-radius: 5px;
   .user-avatar {
     float: left;
     margin-right: 15px;
     display: inline-block;
   }
-
-  .comment-avatar {
-    float: left;
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding-top: 10px;
+  .user-avatar {
+    padding-top: 15px;
   }
-  .comment-content {
-
+  .post-image {
+    padding-bottom: 15px;
   }
-
   .post-container {
     text-align: left;
     padding: 0;
