@@ -127,6 +127,7 @@ logo {
 }
 
 header {
+  margin-top: 30px;
   background-color: $background_color;
   opacity: 0.9;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
@@ -455,6 +456,12 @@ postlogo {
 }
 
 //------------------CHAT INDEX STYLING----------------//
+
+.invisible-break {
+  content: "";
+  display: block;
+  margin: 1.1rem 0;
+}
 
 .main {
   background-color: $background_color;
