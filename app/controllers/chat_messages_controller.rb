@@ -1,7 +1,6 @@
 class ChatMessagesController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
-
   def create
     gon.user_id = current_user.id
     @chat_message = ChatMessage.new(message_params)

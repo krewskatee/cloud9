@@ -271,10 +271,11 @@ nav a:hover::before {
   }
 
   #post-search {
-
     width: auto;
     display: inline-block;
     .search {
+      background-color: $background_color;
+      opacity: 0.9;
       border-radius: 2px;
       border: none;
       border-bottom: 1px solid;
