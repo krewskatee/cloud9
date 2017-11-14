@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy, :update, :edit]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_rescue
 
   def index
     @posts = Post.all.includes(:comments).order("created_at desc")
@@ -122,6 +123,10 @@ class PostsController < ApplicationController
 
   def allowed_params_tags
     params.require(:tags).permit(:title)
+  end
+
+  def record_rescue
+    redirect_to "/"
   end
 
 end

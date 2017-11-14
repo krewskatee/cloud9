@@ -50,5 +50,5 @@ Rails.application.routes.draw do
   delete '/user_chats/:id/:chat_id' => 'user_chats#destroy'
 
   mount ActionCable.server, at: '/cable'
-
+  get '*path' => redirect('/')
 end
