@@ -1,4 +1,5 @@
 <div id="app">
+
   <div class="error-wrapper">
     <div class="alert alert-danger" v-for="error in errors">
       <p class="alert-message">
@@ -8,7 +9,7 @@
   </div>
 
   <div class="post-header">
-    <%= @post.title %>
+    <postlogo><%= @post.title %></postlogo>
     <br />
     <div class="post-info">
       Views: <%= @post.visit_count %>
@@ -48,26 +49,29 @@
       <br />
       <%= @post.content %>
       <br />
-      <% if @post.post_image.url != "/images/original/missing.png" %>
+      <br />
         <hr>
-        <%= image_tag @post.post_image.url(:large) %>
-      <% end %>
+        <div class="post-image">
+          <% if @post.post_image.url != "/images/original/missing.png" %>
+            <%= image_tag @post.post_image.url(:large) %>
+          <% end %>
+        </div>
       </div>
 
   </div>
 
     <div class="container post-info-wrapper" id="post-wrapper" v-for="comment in post_comments">
       <hr>
-      <div class="comment-avatar">
-        <img v-bind:src="comment.thumb_photo"></img>
-      </div>
       <div class="comment-container">
         <div class="user">
+          <img v-bind:src="comment.thumb_photo"></img>
           {{ comment.username }}
         </div>
 
           <div class="comment-content" v-if="comment.commentVisible === false">
+            <hr>
               {{ comment.content }}
+            <hr>
           </div>
 
           <div class="comment-delete" v-if="comment.user_id == current_user_id && comment.commentVisible === false">

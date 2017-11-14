@@ -2,140 +2,148 @@
   <%= stylesheet_link_tag "chats" %>
 </head>
 
-<div class="alert-wrapper alert">
-</div>
+<div id="app">
 
-<div class="main">
+  <div class="alert-wrapper alert">
+  </div>
 
-    <div class="chat-title">
-      <%= @current_chat.name %>
-    </div>
+  <div class="main">
 
-    Friends
-    <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
-    <i class="fa fa-minus fa-friend-minus" v-on:click="addToggle()" aria-hidden="true"></i>
-
-    <div id="friends-form">
-      <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
-    </div>
-
-    <ul>
-      <% @friends.each do |friend| %>
-        <% if friend.befriender.id == current_user.id %>
-          <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
-        <% elsif friend.friend.id == current_user.id%>
-          <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
-        <% end %>
-      <% end %>
-    </ul>
-    <div class="listings_direct-messages">
-
-      Channels
-      <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
-      <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
-      <div class="add-chat">
-        <%= render "add_chats", purpose: "Add", url: "/chats", verb: :post %>
+      <div class="chat-title">
+        <%= @current_chat.name %>
       </div>
+
+      Friends
+      <i class="fa fa-plus fa-friend-plus" v-on:click="addFriendToggle()" aria-hidden="true"></i>
+      <i class="fa fa-minus fa-friend-minus" v-on:click="addToggle()" aria-hidden="true"></i>
+
+      <div id="friends-form">
+        <%= render "relationships/form", purpose: "Create", url: "/relationships", verb: :post %>
+      </div>
+
       <ul>
-        <% @chats.each do |chat| %>
-          <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get %> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
-        <% end %>
-      </ul>
-
-      Friend Requests
-      <ul class="channel_list">
-        <% @friend_requests.each do |friend_request| %>
-          <li>
-            <%= friend_request.befriender.username %> |
-            <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch %>
-            <%= link_to "Decline", "/friends/#{friend_request.id}", class:'channel-link-delete', method: :delete %>
-          </li>
-        <% end %>
-      </ul>
-
-      Add people to chat
-      <i class="fa fa-plus add-people-plus" v-on:click="addPeopleChatFormShow()" aria-hidden="true"></i>
-      <i class="fa fa-minus add-people-minus" v-on:click="removePeopleChatFormHide" aria-hidden="true"></i>
-      <div class="add-form">
-        <%= render "add_form", purpose: "Add", url: "/user_chats", verb: :post %>
-      </div>
-      <br /><br />
-      Chat Users
-      <ul class="channel_list">
-        <% @current_chat.users.each do |user| %>
-          <% if user.id != current_user.id %>
-            <li>
-                <%= image_tag user.avatar.url(:tiny) %> <%= user.username %> <%= link_to "Remove", "/user_chats/#{user.id}/#{@chat.id}", class: 'channel-link-delete', method: :delete  %>
-            </li>
+        <% @friends.each do |friend| %>
+          <% if friend.befriender.id == current_user.id %>
+            <li><%= image_tag friend.friend.avatar.url(:tiny) %> <%= friend.friend.username %> <%= link_to "Delete", "/friends/delete/#{friend.friend.id}", class:'channel-link-delete', method: :delete %></li>
+          <% elsif friend.friend.id == current_user.id%>
+            <li><%= image_tag friend.befriender.avatar.url(:tiny) %> <%= friend.befriender.username %> <%= link_to "Delete", "/friends/delete/#{friend.befriender.id}", class:'channel-link-delete', method: :delete %></li>
           <% end %>
         <% end %>
       </ul>
+      <div class="listings_direct-messages">
 
+        Channels
+        <i class="fa fa-plus chat-form-plus" v-on:click="chatFormShow()" aria-hidden="true"></i>
+        <i class="fa fa-minus chat-form-minus" v-on:click="chatFormHide()" aria-hidden="true"></i>
+        <div class="add-chat">
+          <%= render "add_chats", purpose: "Add", url: "/chats", verb: :post %>
+        </div>
+        <ul>
+          <% @chats.each do |chat| %>
+            <li><%= link_to chat.name, "/chats/#{chat.id}", class:'channel-link', method: :get %> <%= link_to "Delete", "/chats/#{chat.id}", class: 'channel-link-delete', method: :delete  %></li>
+          <% end %>
+        </ul>
+
+        Friend Requests
+        <ul class="channel_list">
+          <% @friend_requests.each do |friend_request| %>
+            <li>
+              <%= friend_request.befriender.username %> |
+              <%= link_to "Accept", "/friends/decision/#{friend_request.id}", method: :patch %>
+              <%= link_to "Decline", "/friends/#{friend_request.id}", class:'channel-link-delete', method: :delete %>
+            </li>
+          <% end %>
+        </ul>
+
+        Add people to chat
+        <i class="fa fa-plus add-people-plus" v-on:click="addPeopleChatFormShow()" aria-hidden="true"></i>
+        <i class="fa fa-minus add-people-minus" v-on:click="removePeopleChatFormHide" aria-hidden="true"></i>
+        <div class="add-form">
+          <%= render "add_form", purpose: "Add", url: "/user_chats", verb: :post %>
+        </div>
+        <br /><br />
+        Chat Users
+        <ul class="channel_list">
+          <% @current_chat.users.each do |user| %>
+            <% if user.id != current_user.id %>
+              <li>
+                  <%= image_tag user.avatar.url(:tiny) %> <%= user.username %> <%= link_to "Remove", "/user_chats/#{user.id}/#{@chat.id}", class: 'channel-link-delete', method: :delete  %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+      </div>
+  </div>
+
+  <div class="container chat-container">
+    <div id="scroll-container">
+      <div id="message-wr">
+          <% @chat_messages.each do |message| %>
+              <div id="message-content">
+                <%= message.user.username %>: <%= message.content %>
+              </div>
+          <% end %>
+      </div>
     </div>
-</div>
-
-<div class="container chat-container">
-  <div id="scroll-container">
-    <div id="message-wr">
-        <% @chat_messages.each do |message| %>
-            <div id="message-content">
-              <%= message.user.username %>: <%= message.content %>
-            </div>
-        <% end %>
+    <div class="message-input-container">
+      <%= form_for(@chat_message, remote: true) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :chat_id, value: @chat.id %>
+        <%= f.text_area :content, class: "message-input" %>
+        <%= f.submit "send", class: "btn btn-large btn-info chat-submit", onclick: "onSubmitClick()" %>
+      <% end %>
     </div>
   </div>
-  <div class="message-input-container">
-    <%= form_for(@chat_message, remote: true) do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :chat_id, value: @chat.id %>
-      <%= f.text_area :content, class: "message-input" %>
-      <%= f.submit "send", class: "btn btn-large btn-info chat-submit", onclick: "onSubmitClick()" %>
-    <% end %>
-  </div>
 </div>
+  <div id="videos">
+    <div id="publisher"></div>
+    <div id="subscriber"></div>
+  </div>
 
-<script>
-  // replace these values with those generated in your TokBox Account
-  var apiKey = <%= ENV['API_KEY'] %>;
-  var sessionId = gon.session_id;
-  var token = gon.token;
-  // Handling all of our errors here by alerting them
-  function handleError(error) {
-    if (error) {
-      alert(error.message);
-    }
-  }
-
-  // (optional) add server code here
-  initializeSession();
-
-  function initializeSession() {
-    var session = OT.initSession(apiKey, sessionId);
-
-    // Subscribe to a newly created stream
-    session.on('streamCreated', function(event) {
-      session.subscribe(event.stream, 'subscriber', {
-        insertMode: 'append',
-        width: '100%',
-        height: '100%'
-      }, handleError);
-    });
-
-    // Create a publisher
-    var publisher = OT.initPublisher('publisher', {
-      insertMode: 'append',
-      width: '100%',
-      height: '100%'
-    }, handleError);
-
-    // Connect to the session
-    session.connect(token, function(error) {
-      // If the connection is successful, initialize a publisher and publish to the session
+  <script>
+    // replace these values with those generated in your TokBox Account
+    var apiKey = <%= ENV['API_KEY'] %>;
+    var sessionId = gon.session_id;
+    var token = gon.token;
+    // Handling all of our errors here by alerting them
+    function handleError(error) {
       if (error) {
-        // handleError(error);
-      } else {
-        session.publish(publisher, handleError);
+        alert(error.message);
       }
-    });
-  }
-</script>
+    }
+
+    // (optional) add server code here
+    initializeSession();
+
+    function initializeSession() {
+      var session = OT.initSession(apiKey, sessionId);
+
+      // Subscribe to a newly created stream
+      session.on('streamCreated', function(event) {
+        session.subscribe(event.stream, 'subscriber', {
+          insertMode: 'append',
+          width: '50%',
+          height: '50%'
+        }, handleError);
+      });
+
+      // Create a publisher
+      var publisher = OT.initPublisher('publisher', {
+        insertMode: 'append',
+        width: '50%',
+        height: '50%'
+      }, handleError);
+
+      // Connect to the session
+      session.connect(token, function(error) {
+        // If the connection is successful, initialize a publisher and publish to the session
+        if (error) {
+          // handleError(error);
+        } else {
+          session.publish(publisher, handleError);
+        }
+      });
+    }
+
+  </script>
