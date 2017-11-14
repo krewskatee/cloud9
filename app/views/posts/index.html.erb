@@ -14,31 +14,27 @@
 </div>
 
 <% @posts.each do |post| %>
-<a href="/post/<% post.id %>">
-<div id="posts_wrapper" class="skinny-wrapper">
-
-  <hr>
-  <div class="post">
-    <p class="date">
-      <span class="username"><%= post.user.username.upcase %></span>
-      <br />
-      <% if post.comments.last %>
-        <%= local_time(post.comments.last.created_at, "%A, %d %b %Y") %>
-        <%= local_time(post.comments.last.created_at, "%l:%M %p") %>
-      <% else %>
-        <%= local_time(post.created_at, "%A, %d %b %Y") %>
-        <%= local_time(post.created_at, "%l:%M %p") %>
-      <% end %>
-    </p>
-
-    <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get %></h1>
-
-    <p class="views">
-      Views:
-      <%= post.visit_count %>
-      Comments:
-      <%= post.comments.count %>
-    </p>
+  <div id="posts_wrapper" class="skinny-wrapper">
+    <hr>
+    <div class="post">
+      <p class="date">
+        <span class="username"><%= post.user.username.upcase %></span>
+        <br />
+        <% if post.comments.last %>
+          <%= local_time(post.comments.last.created_at, "%A, %d %b %Y") %>
+          <%= local_time(post.comments.last.created_at, "%l:%M %p") %>
+        <% else %>
+          <%= local_time(post.created_at, "%A, %d %b %Y") %>
+          <%= local_time(post.created_at, "%l:%M %p") %>
+        <% end %>
+      </p>
+      <h1 class="title_link"><%= link_to post.title, "/post/#{post.id}", method: :get %></h1>
+      <p class="views">
+        Views:
+        <%= post.visit_count %>
+        Comments:
+        <%= post.comments.count %>
+      </p>
+    </div>
   </div>
-</div>
 <% end %>
