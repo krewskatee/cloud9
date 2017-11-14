@@ -47,9 +47,12 @@
     <br />
     <%= @post.content %>
     <br />
+    <br />
       <hr>
       <div class="post-image">
-        <%= image_tag @post.post_image.url(:large) %>
+        <% if @post.post_image.url != "/images/original/missing.png" %>
+          <%= image_tag @post.post_image.url(:large) %>
+        <% end %>
       </div>
     </div>
 
