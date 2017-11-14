@@ -1,7 +1,8 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  require "opentok"
+  rescue_from ActiveRecord::RecordNotFound, with: :record_rescue
 
+  require "opentok"
 
   def index
     @relationship = Relationship.new
@@ -70,6 +71,10 @@ class ChatsController < ApplicationController
     if @opentok.nil?
       @opentok = OpenTok::OpenTok.new ENV['API_KEY'], ENV['SECRET']
     end
+  end
+
+  def record_rescue
+    redirect_to "/chats"
   end
 
 end
