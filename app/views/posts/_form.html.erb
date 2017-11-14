@@ -13,22 +13,22 @@
     <div class="form">
       <h2>Create Article</h2>
       <br />
-        <%= form_for @post, url: "/post", method: :post, html: { multipart: true } do |f| %>
+      <%= form_for @post, url: "/post", method: :post, html: { multipart: true } do |f| %>
 
-          <%= f.label :tags %>:
-          <%= fields_for :tags do |f| %>
-             <%= f.text_field :title, class: 'form-control input_field' %>
-          <% end %>
+        <%= f.label :tags %>:
+        <%= fields_for :tags do |f| %>
+           <%= f.text_field :title, class: 'form-control input_field' %>
+        <% end %>
 
-          <br />
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.label :title %>:
-          <%= f.text_field :title, class: 'form-control input_field' %><br />
+        <br />
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.label :title %>:
+        <%= f.text_field :title, class: 'form-control input_field' %><br />
 
-          <%= f.label :content %>:
-          <%= f.text_area :content, class: "message-edit-area", id: 'message-edit-area' %><br />
+        <%= f.label :content %>:
+        <%= f.text_area :content, class: "message-edit-area", id: 'message-edit-area' %><br />
 
-          <%= f.file_field :post_image %>
+        <%= f.file_field :post_image %>
 
 
         <div class="login">
