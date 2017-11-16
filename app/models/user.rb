@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :friends, class_name: "Relationship", foreign_key: :friend_id
   has_many :befrienders, class_name: "Relationship", foreign_key: :befriender_id
 
+  has_many :user_teams
+  has_many :teams, through: :user_teams
+
   validates :username, presence: true
   validates :username, length: { in: 3..20 }
   validates :username, uniqueness: true

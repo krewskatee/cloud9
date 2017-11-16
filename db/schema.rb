@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112202220) do
+ActiveRecord::Schema.define(version: 20171116064135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20171112202220) do
     t.string "post_image_content_type"
     t.integer "post_image_file_size"
     t.datetime "post_image_updated_at"
+    t.integer "team_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -92,9 +93,19 @@ ActiveRecord::Schema.define(version: 20171112202220) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_chats", force: :cascade do |t|
     t.integer "chat_id"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_teams", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
