@@ -49,6 +49,13 @@ Rails.application.routes.draw do
   patch '/comment/:id' => 'comments#update'
   delete '/user_chats/:id/:chat_id' => 'user_chats#destroy'
 
+  get '/teams' => 'teams#index'
+  get '/teams/new' => 'teams#new'
+  post '/teams' => 'teams#create'
+  get '/teams/:id' => 'teams#show'
+  get '/teams/:id/edit' => 'teams#edit'
+  delete '/teams' => 'teams#destroy'
+
   mount ActionCable.server, at: '/cable'
   get '*path' => redirect('/')
 end
