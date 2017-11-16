@@ -5,12 +5,14 @@ class Post < ApplicationRecord
 
 
   belongs_to :user
+  belongs_to :team
 
   has_many :comments
   has_many :forum_tags
   has_many :tags, through: :forum_tags
   has_many :post_visits
   has_many :visits, through: :post_visits
+
 
   has_attached_file :post_image, styles: { large: "600x600>", tiny: "25x25>", thumb: "75x75>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :post_image, content_type: /\Aimage\/.*\z/
