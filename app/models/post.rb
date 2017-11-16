@@ -17,7 +17,7 @@ class Post < ApplicationRecord
   #validates_with AttachmentPresenceValidator, attributes: :post_image
 
   validates :title, presence: true
-  validates :title, length: { in: 3..20 }
+  validates :title, length: { in: 3..40 }
   validates :content, length: { in: 10..500 }
 
 

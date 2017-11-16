@@ -38,7 +38,10 @@ class PostsController < ApplicationController
       flash[:success] = "Succesfully created post."
       redirect_to "/"
     else
-      render "new.html.erb"
+      @post.errors.full_messages.each do |error|
+        flash[:danger] = "#{error}"
+        render "new.html.erb"
+      end
     end
   end
 
@@ -83,7 +86,6 @@ class PostsController < ApplicationController
                                         tag_id: find.id
                                         )
           else
-            puts = "=================================================================="
             obj_tag = Tag.create(
                                 title: tag
                                 )

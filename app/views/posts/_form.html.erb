@@ -1,12 +1,3 @@
-<% if @post.errors.any? %>
-  <div id="error_explanation">
-    <ul>
-      <% @post.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
 
 <div class="container jumbo-form">
   <div class="jumbotron">
@@ -22,7 +13,7 @@
 
         <br />
         <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.label :title %>:
+        <%= f.label "Title:" %>
         <%= f.text_field :title, class: 'form-control input_field' %><br />
 
         <%= f.label :content %>:
