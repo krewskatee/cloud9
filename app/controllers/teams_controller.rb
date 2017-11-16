@@ -9,11 +9,16 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def show
+    @team = Team.find(params[:id])
+  end
+
   def create
     @team = Team.new(team_params)
     if @team.save
-      UserChat.create(user_id: current_user.id, team_id: @team.id)
+      UserTeam.create(user_id: current_user.id, team_id: @team.id)
       flash[:success] = "Succesfully created post."
+      redirect_to '/teams'
     else
       @team.errors.full_messages.each do |error|
         flash[:danger] = "#{error}"
