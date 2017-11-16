@@ -24,6 +24,11 @@
       </li>
       <nav>
         <ul>
+          <% if current_user %>
+            <li class="navbar-link">
+              <username><%= current_user.username %></username>
+            </li>
+          <% end %>
           <li class="navbar-link">
             <a href="/">Home</a>
           </li>
@@ -52,7 +57,7 @@
     </div>
   </header>
 
-  
+
   <%= yield %>
   </body>
 </html>

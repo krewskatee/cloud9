@@ -171,6 +171,13 @@ nav a {
   font-color: $font_color;
 }
 
+username {
+  color: $font_color;
+
+  font-size: 1em;
+  font-color: $font_color;
+}
+
 nav a:hover {
   color: $nav_bar_link_hover_color;
   text-decoration: none;
@@ -260,7 +267,7 @@ nav a:hover::before {
   }
   .username {
     color: #000;
-    font-size: 1.2em;
+    font-size: 1.5em;
   }
 
   a {
