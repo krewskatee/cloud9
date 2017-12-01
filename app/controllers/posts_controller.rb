@@ -83,7 +83,6 @@ class PostsController < ApplicationController
                                         tag_id: find.id
                                         )
           else
-            puts = "=================================================================="
             obj_tag = Tag.create(
                                 title: tag
                                 )
