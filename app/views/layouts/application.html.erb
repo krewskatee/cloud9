@@ -41,6 +41,17 @@
             </li>
           <% else %>
             <li class="navbar-link">
+              <div class="dropdown">
+                <p data-toggle="dropdown">Dropdown Example
+                <span class="caret"></span></p>
+                <ul class="dropdown-menu">
+                  <% current_user.teams.each do |team| %>
+                  <li><a href="#"><%= team.name %></a></li>
+                  <% end %>
+                </ul>
+              </div>
+            </li>
+            <li class="navbar-link">
               <a href="/users/edit">Account</a>
             </li>
             <li class="navbar-link">
@@ -52,7 +63,7 @@
     </div>
   </header>
 
-  
+
   <%= yield %>
   </body>
 </html>
