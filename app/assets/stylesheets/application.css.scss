@@ -630,7 +630,7 @@ textarea#message-edit-area {
   color: $delete_link_hover_color;
 }
 
-//------------------EDIT ACCOUNT PAGE----------------//
+//------------------ACCOUNT EDIT PAGE----------------//
 
 .avatar-block {
   text-align: center;
@@ -640,4 +640,14 @@ textarea#message-edit-area {
   .upload-picture {
     padding-left: 80px;
   }
+}
+
+//------------------TEAMS INDEX PAGE----------------//
+
+.teams-container {
+  margin-top: 5%;
+}
+
+.team-header {
+  text-align: center;
 }
